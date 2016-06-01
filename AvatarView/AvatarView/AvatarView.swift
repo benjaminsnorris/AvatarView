@@ -7,6 +7,11 @@
 
 import UIKit
 
+public protocol AvatarPresentable {
+    var initials: String? { get }
+    var image: UIImage? { get }
+}
+
 @IBDesignable public class AvatarView: UIView {
     
     // MARK: - Inspectable properties
@@ -87,6 +92,11 @@ import UIKit
     public func reset() {
         imageView.image = nil
         initialsLabel.text = nil
+    }
+    
+    public func update(with presenter: AvatarPresentable) {
+        initialsLabel.text = presenter.initials
+        imageView.image = presenter.image
     }
     
 }
