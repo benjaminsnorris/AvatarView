@@ -10,6 +10,7 @@
 		70F4CDE71CFFA22200A6F8BF /* AvatarView.h in Headers */ = {isa = PBXBuildFile; fileRef = 70F4CDE61CFFA22200A6F8BF /* AvatarView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		70F4CDEE1CFFA22200A6F8BF /* AvatarView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70F4CDE31CFFA22200A6F8BF /* AvatarView.framework */; };
 		70F4CDF31CFFA22200A6F8BF /* AvatarViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F4CDF21CFFA22200A6F8BF /* AvatarViewTests.swift */; };
+		70F4CDFE1CFFA27400A6F8BF /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F4CDFD1CFFA27400A6F8BF /* AvatarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,7 @@
 		70F4CDED1CFFA22200A6F8BF /* AvatarViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AvatarViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		70F4CDF21CFFA22200A6F8BF /* AvatarViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarViewTests.swift; sourceTree = "<group>"; };
 		70F4CDF41CFFA22200A6F8BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		70F4CDFD1CFFA27400A6F8BF /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				70F4CDE61CFFA22200A6F8BF /* AvatarView.h */,
+				70F4CDFD1CFFA27400A6F8BF /* AvatarView.swift */,
 				70F4CDE81CFFA22200A6F8BF /* Info.plist */,
 			);
 			path = AvatarView;
@@ -194,6 +197,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				70F4CDFE1CFFA27400A6F8BF /* AvatarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -310,6 +314,7 @@
 		70F4CDF81CFFA22200A6F8BF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -321,12 +326,14 @@
 				PRODUCT_BUNDLE_IDENTIFIER = design.bsn.AvatarView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		70F4CDF91CFFA22200A6F8BF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
