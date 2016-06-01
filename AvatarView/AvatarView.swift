@@ -22,19 +22,31 @@ public protocol AvatarPresentable {
         }
     }
     
+    @IBInspectable public var innerColor: UIColor = UIColor(red: 140 / 255.0, green: 189 / 255.0, blue: 74 / 255.0, alpha: 1.0) {
+        didSet {
+            updateColors()
+        }
+    }
+    
     @IBInspectable public var textColor: UIColor = UIColor(red: 50 / 255.0, green: 137 / 255.0, blue: 68 / 255.0, alpha: 1.0) {
         didSet {
             updateColors()
         }
     }
     
-    @IBInspectable public var borderWidth: CGFloat = 8.0 {
+    @IBInspectable public var borderWidth: CGFloat = 2.0 {
         didSet {
             updateBorder()
         }
     }
     
     @IBInspectable public var initials: String? {
+        didSet {
+            updateInitials()
+        }
+    }
+    
+    @IBInspectable public var font: UIFont = UIFont.systemFontOfSize(17.0, weight: UIFontWeightLight) {
         didSet {
             updateInitials()
         }
@@ -82,8 +94,6 @@ public protocol AvatarPresentable {
         
         let minSideSize = min(frame.size.width, frame.size.height)
         layer.cornerRadius = minSideSize / 2.0
-        
-        initialsLabel.font = UIFont.systemFontOfSize(minSideSize / 2.5, weight: UIFontWeightLight)
     }
     
     
@@ -139,6 +149,7 @@ private extension AvatarView {
     }
     
     func updateColors() {
+        backgroundView.backgroundColor = innerColor
         layer.borderColor = borderColor.CGColor
         initialsLabel.textColor = textColor
     }
@@ -149,6 +160,7 @@ private extension AvatarView {
     
     func updateInitials() {
         initialsLabel.text = initials
+        initialsLabel.font = font
     }
     
     func updateImage() {
