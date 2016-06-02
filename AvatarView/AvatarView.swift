@@ -116,8 +116,8 @@ public protocol AvatarPresentable {
     // MARK: - Public API
     
     public func reset() {
-        imageView.image = nil
-        initialsLabel.text = nil
+        image = nil
+        initials = nil
     }
     
     public func update(with presenter: AvatarPresentable) {
