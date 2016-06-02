@@ -8,7 +8,7 @@
 import UIKit
 
 public protocol AvatarPresentable {
-    var initials: String? { get }
+    var initialsString: String? { get }
     var image: UIImage? { get }
 }
 
@@ -121,7 +121,7 @@ public protocol AvatarPresentable {
     }
     
     public func update(with presenter: AvatarPresentable) {
-        initialsLabel.text = presenter.initials
+        initialsLabel.text = presenter.initialsString
         imageView.image = presenter.image
     }
     
