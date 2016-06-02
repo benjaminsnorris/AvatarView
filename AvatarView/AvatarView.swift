@@ -121,8 +121,8 @@ public protocol AvatarPresentable {
     }
     
     public func update(with presenter: AvatarPresentable) {
-        initialsLabel.text = presenter.initialsString
-        imageView.image = presenter.image
+        initials = presenter.initialsString
+        image = presenter.image
     }
     
 }
