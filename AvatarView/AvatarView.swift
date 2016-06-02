@@ -16,19 +16,19 @@ public protocol AvatarPresentable {
     
     // MARK: - Inspectable properties
     
-    @IBInspectable public var borderColor: UIColor = UIColor(red: 50 / 255.0, green: 137 / 255.0, blue: 68 / 255.0, alpha: 1.0) {
+    @IBInspectable public var borderColor: UIColor = UIColor(red: 29 / 255.0, green: 30 / 255.0, blue: 29 / 255.0, alpha: 1.0) {
         didSet {
             updateColors()
         }
     }
     
-    @IBInspectable public var innerColor: UIColor = UIColor(red: 140 / 255.0, green: 189 / 255.0, blue: 74 / 255.0, alpha: 1.0) {
+    @IBInspectable public var innerColor: UIColor = UIColor(red: 232 / 255.0, green: 236 / 255.0, blue: 237 / 255.0, alpha: 1.0) {
         didSet {
             updateColors()
         }
     }
     
-    @IBInspectable public var textColor: UIColor = UIColor(red: 50 / 255.0, green: 137 / 255.0, blue: 68 / 255.0, alpha: 1.0) {
+    @IBInspectable public var textColor: UIColor = UIColor(red: 29 / 255.0, green: 30 / 255.0, blue: 29 / 255.0, alpha: 1.0) {
         didSet {
             updateColors()
         }
