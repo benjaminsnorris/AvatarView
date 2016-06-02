@@ -40,13 +40,31 @@ public protocol AvatarPresentable {
         }
     }
     
-    @IBInspectable public var initials: String? {
+    @IBInspectable public var innerMargin: CGFloat = 2.0 {
+        didSet {
+            updateInnerMargin()
+        }
+    }
+    
+    @IBInspectable public var fontName: String? = nil {
         didSet {
             updateInitials()
         }
     }
     
-    @IBInspectable public var font: UIFont = UIFont.systemFontOfSize(17.0, weight: UIFontWeightLight) {
+    @IBInspectable public var fontSize: CGFloat = 17.0 {
+        didSet {
+            updateInitials()
+        }
+    }
+    
+    @IBInspectable public var automaticSize: Bool = true {
+        didSet {
+            layoutIfNeeded()
+        }
+    }
+    
+    @IBInspectable public var initials: String? {
         didSet {
             updateInitials()
         }
@@ -55,12 +73,6 @@ public protocol AvatarPresentable {
     @IBInspectable public var image: UIImage? {
         didSet {
             updateImage()
-        }
-    }
-    
-    @IBInspectable public var innerMargin: CGFloat = 2.0 {
-        didSet {
-            
         }
     }
     
@@ -94,6 +106,10 @@ public protocol AvatarPresentable {
         
         let minSideSize = min(frame.size.width, frame.size.height)
         layer.cornerRadius = minSideSize / 2.0
+        
+        if automaticSize {
+            fontSize = minSideSize / 2.5
+        }
     }
     
     
@@ -159,8 +175,14 @@ private extension AvatarView {
     }
     
     func updateInitials() {
+        let customFont: UIFont
+        if let fontName = fontName, font = UIFont(name: fontName, size: fontSize) {
+            customFont = font
+        } else {
+            customFont = UIFont.systemFontOfSize(fontSize, weight: UIFontWeightLight)
+        }
         initialsLabel.text = initials
-        initialsLabel.font = font
+        initialsLabel.font = customFont
     }
     
     func updateImage() {
