@@ -51,3 +51,14 @@ public extension NamePresentable {
     }
     
 }
+
+
+// MARK: - Sorting functions
+
+public extension CollectionType where Self.Generator.Element: NamePresentable {
+    
+    public func sortedByName(ascending ascending: Bool = true) -> [Self.Generator.Element] {
+        return self.sort { ascending ? $0.name < $1.name : $0.name > $1.name }
+    }
+    
+}
