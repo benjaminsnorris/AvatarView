@@ -152,6 +152,7 @@ private extension AvatarView {
         initialsLabel.translatesAutoresizingMaskIntoConstraints = false
         initialsLabel.textAlignment = .Center
         addSubview(initialsLabel)
+        initialsLabel.isAccessibilityElement = false
         
         initialsLabel.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
         initialsLeadingConstraint = initialsLabel.leadingAnchor.constraintEqualToAnchor(leadingAnchor, constant: innerMargin)
@@ -162,6 +163,7 @@ private extension AvatarView {
         // Add image as an overlay to hide initials once it's been added
         imageView.contentMode = .ScaleAspectFill
         setupFullSize(imageView)
+        imageView.isAccessibilityElement = false
     }
     
     func setupFullSize(view: UIView) {
