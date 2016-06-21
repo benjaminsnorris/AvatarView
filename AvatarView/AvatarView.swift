@@ -77,11 +77,16 @@ public protocol AvatarPresentable {
     }
     
     
+    // MARK: - Public properties
+    
+    /// `imageView` is exposed for compatibility with frameworks such as Kingfisher.
+    public let imageView = UIImageView()
+    
+    
     // MARK: - Private properties
     
     private let backgroundView = UIView()
     private let initialsLabel = UILabel()
-    private let imageView = UIImageView()
     private var initialsLeadingConstraint: NSLayoutConstraint!
     private var initialsTrailingConstraint: NSLayoutConstraint!
 
