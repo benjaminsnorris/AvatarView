@@ -112,6 +112,10 @@ public protocol AvatarPresentable {
         }
     }
     
+    override public func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+        initials = "AV"
+    }
     
     // MARK: - Public API
     
