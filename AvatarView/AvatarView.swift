@@ -34,7 +34,7 @@ public protocol AvatarPresentable {
         }
     }
     
-    @IBInspectable public var borderWidth: CGFloat = 2.0 {
+    @IBInspectable public var borderWidth: CGFloat = 0.0 {
         didSet {
             updateBorder()
         }
