@@ -81,6 +81,10 @@ public protocol AvatarPresentable {
     
     /// `imageView` is exposed for compatibility with frameworks such as Kingfisher.
     public let imageView = UIImageView()
+    /// Avoid accessing this often as it involve expensive operations
+    public var imageRepresentation: UIImage {
+        return drawAsImage()
+    }
     
     
     // MARK: - Private properties
@@ -203,6 +207,17 @@ private extension AvatarView {
     func updateInnerMargin() {
         initialsLeadingConstraint.constant = innerMargin
         initialsTrailingConstraint.constant = innerMargin
+    }
+    
+    func drawAsImage() -> UIImage {
+        layoutIfNeeded()
+        var image: UIImage
+        UIGraphicsBeginImageContextWithOptions(frame.size, false, 0.0)
+        let currentContext = UIGraphicsGetCurrentContext()!
+        layer.renderInContext(currentContext)
+        image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
     }
     
 }
