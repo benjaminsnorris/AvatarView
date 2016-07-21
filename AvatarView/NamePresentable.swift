@@ -24,7 +24,7 @@ public extension NamePresentable {
         if let formattedName = CNContactFormatter.stringFromContact(contact, style: .FullName) {
             fullName = formattedName
         } else {
-            var name = givenName ?? ""
+            let name = givenName ?? ""
             if name.isEmpty {
                 fullName = familyName ?? ""
             } else if let familyName = familyName where familyName.characters.count > 0 {
