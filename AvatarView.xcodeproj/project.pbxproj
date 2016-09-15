@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7096370D1D00A939006884B8 /* NamePresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7096370C1D00A939006884B8 /* NamePresentable.swift */; };
+		70B7E0F01D8AD1800010220B /* AvatarHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B7E0EF1D8AD1800010220B /* AvatarHeader.swift */; };
 		70F4CDE71CFFA22200A6F8BF /* AvatarView.h in Headers */ = {isa = PBXBuildFile; fileRef = 70F4CDE61CFFA22200A6F8BF /* AvatarView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		70F4CDEE1CFFA22200A6F8BF /* AvatarView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70F4CDE31CFFA22200A6F8BF /* AvatarView.framework */; };
 		70F4CDF31CFFA22200A6F8BF /* AvatarViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F4CDF21CFFA22200A6F8BF /* AvatarViewTests.swift */; };
@@ -26,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		7096370C1D00A939006884B8 /* NamePresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamePresentable.swift; sourceTree = "<group>"; };
+		70B7E0EF1D8AD1800010220B /* AvatarHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarHeader.swift; sourceTree = "<group>"; };
 		70F4CDE31CFFA22200A6F8BF /* AvatarView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AvatarView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70F4CDE61CFFA22200A6F8BF /* AvatarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AvatarView.h; sourceTree = "<group>"; };
 		70F4CDE81CFFA22200A6F8BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 			children = (
 				70F4CDE61CFFA22200A6F8BF /* AvatarView.h */,
 				70F4CDFD1CFFA27400A6F8BF /* AvatarView.swift */,
+				70B7E0EF1D8AD1800010220B /* AvatarHeader.swift */,
 				7096370C1D00A939006884B8 /* NamePresentable.swift */,
 				70F4CDE81CFFA22200A6F8BF /* Info.plist */,
 			);
@@ -201,6 +204,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7096370D1D00A939006884B8 /* NamePresentable.swift in Sources */,
+				70B7E0F01D8AD1800010220B /* AvatarHeader.swift in Sources */,
 				70F4CDFE1CFFA27400A6F8BF /* AvatarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
