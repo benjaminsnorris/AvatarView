@@ -80,9 +80,9 @@ public protocol AvatarPresentable {
     // MARK: - Public properties
     
     /// `imageView` is exposed for compatibility with frameworks such as Kingfisher.
-    open let imageView = UIImageView()
+    public let imageView = UIImageView()
     /// Avoid accessing this often as it involve expensive operations
-    open var imageRepresentation: UIImage {
+    public var imageRepresentation: UIImage {
         return drawAsImage()
     }
     
