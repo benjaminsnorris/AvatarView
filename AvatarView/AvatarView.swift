@@ -1,7 +1,7 @@
 /*
  |  _   ____   ____   _
- | ⎛ |‾|  ⚈ |-| ⚈  |‾| ⎞
- | ⎝ |  ‾‾‾‾| |‾‾‾‾  | ⎠
+ | | |‾|  ⚈ |-| ⚈  |‾| |
+ | | |  ‾‾‾‾| |‾‾‾‾  | |
  |  ‾        ‾        ‾
  */
 
@@ -12,65 +12,65 @@ public protocol AvatarPresentable {
     var image: UIImage? { get }
 }
 
-@IBDesignable public class AvatarView: UIView {
+@IBDesignable open class AvatarView: UIView {
     
     // MARK: - Inspectable properties
     
-    @IBInspectable public var borderColor: UIColor = UIColor(red: 29 / 255.0, green: 30 / 255.0, blue: 29 / 255.0, alpha: 1.0) {
+    @IBInspectable open var borderColor: UIColor = UIColor(red: 29 / 255.0, green: 30 / 255.0, blue: 29 / 255.0, alpha: 1.0) {
         didSet {
             updateColors()
         }
     }
     
-    @IBInspectable public var innerColor: UIColor = UIColor(red: 232 / 255.0, green: 236 / 255.0, blue: 237 / 255.0, alpha: 1.0) {
+    @IBInspectable open var innerColor: UIColor = UIColor(red: 232 / 255.0, green: 236 / 255.0, blue: 237 / 255.0, alpha: 1.0) {
         didSet {
             updateColors()
         }
     }
     
-    @IBInspectable public var textColor: UIColor = UIColor(red: 29 / 255.0, green: 30 / 255.0, blue: 29 / 255.0, alpha: 1.0) {
+    @IBInspectable open var textColor: UIColor = UIColor(red: 29 / 255.0, green: 30 / 255.0, blue: 29 / 255.0, alpha: 1.0) {
         didSet {
             updateColors()
         }
     }
     
-    @IBInspectable public var borderWidth: CGFloat = 0.0 {
+    @IBInspectable open var borderWidth: CGFloat = 0.0 {
         didSet {
             updateBorder()
         }
     }
     
-    @IBInspectable public var innerMargin: CGFloat = 2.0 {
+    @IBInspectable open var innerMargin: CGFloat = 2.0 {
         didSet {
             updateInnerMargin()
         }
     }
     
-    @IBInspectable public var fontName: String? = nil {
+    @IBInspectable open var fontName: String? = nil {
         didSet {
             updateInitials()
         }
     }
     
-    @IBInspectable public var fontSize: CGFloat = 17.0 {
+    @IBInspectable open var fontSize: CGFloat = 17.0 {
         didSet {
             updateInitials()
         }
     }
     
-    @IBInspectable public var automaticSize: Bool = true {
+    @IBInspectable open var automaticSize: Bool = true {
         didSet {
             layoutIfNeeded()
         }
     }
     
-    @IBInspectable public var initials: String? {
+    @IBInspectable open var initials: String? {
         didSet {
             updateInitials()
         }
     }
     
-    @IBInspectable public var image: UIImage? {
+    @IBInspectable open var image: UIImage? {
         didSet {
             updateImage()
         }
@@ -89,10 +89,10 @@ public protocol AvatarPresentable {
     
     // MARK: - Private properties
     
-    private let backgroundView = UIView()
-    private let initialsLabel = UILabel()
-    private var initialsLeadingConstraint: NSLayoutConstraint!
-    private var initialsTrailingConstraint: NSLayoutConstraint!
+    fileprivate let backgroundView = UIView()
+    fileprivate let initialsLabel = UILabel()
+    fileprivate var initialsLeadingConstraint: NSLayoutConstraint!
+    fileprivate var initialsTrailingConstraint: NSLayoutConstraint!
 
     
     // MARK: - Initialization
@@ -110,7 +110,7 @@ public protocol AvatarPresentable {
     
     // MARK: - Lifecycle overrides
     
-    override public func layoutSubviews() {
+    override open func layoutSubviews() {
         super.layoutSubviews()
         
         let minSideSize = min(frame.size.width, frame.size.height)
@@ -121,19 +121,19 @@ public protocol AvatarPresentable {
         }
     }
     
-    override public func prepareForInterfaceBuilder() {
+    override open func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         initials = "AV"
     }
     
     // MARK: - Public API
     
-    public func reset() {
+    open func reset() {
         image = nil
         initials = nil
     }
     
-    public func update(with presenter: AvatarPresentable) {
+    open func update(with presenter: AvatarPresentable) {
         initials = presenter.initialsString
         image = presenter.image
     }
@@ -154,34 +154,34 @@ private extension AvatarView {
         setupFullSize(backgroundView)
 
         initialsLabel.translatesAutoresizingMaskIntoConstraints = false
-        initialsLabel.textAlignment = .Center
+        initialsLabel.textAlignment = .center
         addSubview(initialsLabel)
         initialsLabel.isAccessibilityElement = false
         
-        initialsLabel.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
-        initialsLeadingConstraint = initialsLabel.leadingAnchor.constraintEqualToAnchor(leadingAnchor, constant: innerMargin)
-        initialsLeadingConstraint.active = true
-        initialsTrailingConstraint = trailingAnchor.constraintEqualToAnchor(initialsLabel.trailingAnchor, constant: innerMargin)
-        initialsTrailingConstraint.active = true
+        initialsLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        initialsLeadingConstraint = initialsLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: innerMargin)
+        initialsLeadingConstraint.isActive = true
+        initialsTrailingConstraint = trailingAnchor.constraint(equalTo: initialsLabel.trailingAnchor, constant: innerMargin)
+        initialsTrailingConstraint.isActive = true
         
         // Add image as an overlay to hide initials once it's been added
-        imageView.contentMode = .ScaleAspectFill
+        imageView.contentMode = .scaleAspectFill
         setupFullSize(imageView)
         imageView.isAccessibilityElement = false
     }
     
-    func setupFullSize(view: UIView) {
+    func setupFullSize(_ view: UIView) {
         view.translatesAutoresizingMaskIntoConstraints = false
         addSubview(view)
-        view.leadingAnchor.constraintEqualToAnchor(leadingAnchor).active = true
-        view.topAnchor.constraintEqualToAnchor(topAnchor).active = true
-        view.trailingAnchor.constraintEqualToAnchor(trailingAnchor).active = true
-        view.bottomAnchor.constraintEqualToAnchor(bottomAnchor).active = true
+        view.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        view.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        view.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        view.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
     
     func updateColors() {
         backgroundView.backgroundColor = innerColor
-        layer.borderColor = borderColor.CGColor
+        layer.borderColor = borderColor.cgColor
         initialsLabel.textColor = textColor
     }
     
@@ -191,10 +191,10 @@ private extension AvatarView {
     
     func updateInitials() {
         let customFont: UIFont
-        if let fontName = fontName, font = UIFont(name: fontName, size: fontSize) {
+        if let fontName = fontName, let font = UIFont(name: fontName, size: fontSize) {
             customFont = font
         } else {
-            customFont = UIFont.systemFontOfSize(fontSize, weight: UIFontWeightLight)
+            customFont = UIFont.systemFont(ofSize: fontSize, weight: UIFontWeightLight)
         }
         initialsLabel.text = initials
         initialsLabel.font = customFont
@@ -214,8 +214,8 @@ private extension AvatarView {
         var image: UIImage
         UIGraphicsBeginImageContextWithOptions(frame.size, false, 0.0)
         let currentContext = UIGraphicsGetCurrentContext()!
-        layer.renderInContext(currentContext)
-        image = UIGraphicsGetImageFromCurrentImageContext()
+        layer.render(in: currentContext)
+        image = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         return image
     }
