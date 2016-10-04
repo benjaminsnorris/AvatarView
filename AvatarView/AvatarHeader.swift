@@ -1,61 +1,61 @@
 /*
  |  _   ____   ____   _
- | ⎛ |‾|  ⚈ |-| ⚈  |‾| ⎞
- | ⎝ |  ‾‾‾‾| |‾‾‾‾  | ⎠
+ | | |‾|  ⚈ |-| ⚈  |‾| |
+ | | |  ‾‾‾‾| |‾‾‾‾  | |
  |  ‾        ‾        ‾
  */
 
 import UIKit
 
-public typealias AvatarHeaderPresentable = protocol<NamePresentable, AvatarPresentable>
+public typealias AvatarHeaderPresentable = NamePresentable & AvatarPresentable
 
-@IBDesignable public class AvatarHeader: UIView {
+@IBDesignable open class AvatarHeader: UIView {
     
     // MARK: - Inspectable properties
     
-    @IBInspectable public var borderColor: UIColor = UIColor(red: 29 / 255.0, green: 30 / 255.0, blue: 29 / 255.0, alpha: 1.0) {
+    @IBInspectable open var borderColor: UIColor = UIColor(red: 29 / 255.0, green: 30 / 255.0, blue: 29 / 255.0, alpha: 1.0) {
         didSet {
             updateColors()
         }
     }
     
-    @IBInspectable public var textColor: UIColor = UIColor(red: 29 / 255.0, green: 30 / 255.0, blue: 29 / 255.0, alpha: 1.0) {
+    @IBInspectable open var textColor: UIColor = UIColor(red: 29 / 255.0, green: 30 / 255.0, blue: 29 / 255.0, alpha: 1.0) {
         didSet {
             updateColors()
         }
     }
     
-    @IBInspectable public var borderWidth: CGFloat = 0.5 {
+    @IBInspectable open var borderWidth: CGFloat = 0.5 {
         didSet {
             updateSizes()
         }
     }
     
-    @IBInspectable public var innerMargin: CGFloat = 16 {
+    @IBInspectable open var innerMargin: CGFloat = 16 {
         didSet {
             updateSizes()
         }
     }
     
-    @IBInspectable public var innerHeight: CGFloat = 40 {
+    @IBInspectable open var innerHeight: CGFloat = 40 {
         didSet {
             updateSizes()
         }
     }
     
-    @IBInspectable public var avatarFontName: String? = nil {
+    @IBInspectable open var avatarFontName: String? = nil {
         didSet {
             updateName()
         }
     }
 
-    @IBInspectable public var fontName: String? = nil {
+    @IBInspectable open var fontName: String? = nil {
         didSet {
             updateName()
         }
     }
     
-    @IBInspectable public var fontSize: CGFloat = 17.0 {
+    @IBInspectable open var fontSize: CGFloat = 17.0 {
         didSet {
             updateName()
         }
@@ -64,7 +64,7 @@ public typealias AvatarHeaderPresentable = protocol<NamePresentable, AvatarPrese
     
     // MARK: - Public properties
     
-    public var person: AvatarHeaderPresentable? {
+    open var person: AvatarHeaderPresentable? {
         didSet {
             if let person = person {
                 avatar.update(with: person)
@@ -75,19 +75,19 @@ public typealias AvatarHeaderPresentable = protocol<NamePresentable, AvatarPrese
             }
         }
     }
-    public let avatar = AvatarView(frame: .zero)
+    open let avatar = AvatarView(frame: .zero)
     
     
     // MARK: - Private properties
     
-    private let name = UILabel()
-    private let stackView = UIStackView()
-    private let topLine = UIView()
-    private let bottomLine = UIView()
-    private var topLineHeightConstraint: NSLayoutConstraint!
-    private var bottomLineHeightConstraint: NSLayoutConstraint!
-    private var stackViewHeightConstraint: NSLayoutConstraint!
-    private var outerMargin: CGFloat = 8
+    fileprivate let name = UILabel()
+    fileprivate let stackView = UIStackView()
+    fileprivate let topLine = UIView()
+    fileprivate let bottomLine = UIView()
+    fileprivate var topLineHeightConstraint: NSLayoutConstraint!
+    fileprivate var bottomLineHeightConstraint: NSLayoutConstraint!
+    fileprivate var stackViewHeightConstraint: NSLayoutConstraint!
+    fileprivate var outerMargin: CGFloat = 8
     
     
     // MARK: - Initializers
@@ -109,35 +109,35 @@ public typealias AvatarHeaderPresentable = protocol<NamePresentable, AvatarPrese
 
 private extension AvatarHeader {
     
-    private func setupViews() {
+    func setupViews() {
         translatesAutoresizingMaskIntoConstraints = false
         topLine.translatesAutoresizingMaskIntoConstraints = false
         addSubview(topLine)
-        topLine.leadingAnchor.constraintEqualToAnchor(leadingAnchor).active = true
-        topLine.topAnchor.constraintEqualToAnchor(topAnchor).active = true
-        topLine.trailingAnchor.constraintEqualToAnchor(trailingAnchor).active = true
-        topLineHeightConstraint = topLine.heightAnchor.constraintEqualToConstant(borderWidth)
-        topLineHeightConstraint.active = true
+        topLine.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        topLine.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        topLine.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        topLineHeightConstraint = topLine.heightAnchor.constraint(equalToConstant: borderWidth)
+        topLineHeightConstraint.isActive = true
         
         bottomLine.translatesAutoresizingMaskIntoConstraints = false
         addSubview(bottomLine)
-        bottomLine.leadingAnchor.constraintEqualToAnchor(leadingAnchor).active = true
-        bottomLine.bottomAnchor.constraintEqualToAnchor(bottomAnchor).active = true
-        bottomLine.trailingAnchor.constraintEqualToAnchor(trailingAnchor).active = true
-        bottomLineHeightConstraint = bottomLine.heightAnchor.constraintEqualToConstant(borderWidth)
-        bottomLineHeightConstraint.active = true
+        bottomLine.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        bottomLine.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        bottomLine.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        bottomLineHeightConstraint = bottomLine.heightAnchor.constraint(equalToConstant: borderWidth)
+        bottomLineHeightConstraint.isActive = true
 
         stackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stackView)
-        stackView.leadingAnchor.constraintEqualToAnchor(readableContentGuide.leadingAnchor, constant: outerMargin).active = true
-        stackView.topAnchor.constraintEqualToAnchor(layoutMarginsGuide.topAnchor, constant: outerMargin).active = true
-        stackView.trailingAnchor.constraintEqualToAnchor(readableContentGuide.trailingAnchor, constant: -outerMargin).active = true
-        stackView.bottomAnchor.constraintEqualToAnchor(layoutMarginsGuide.bottomAnchor, constant: -outerMargin).active = true
-        stackViewHeightConstraint = stackView.heightAnchor.constraintEqualToConstant(innerHeight)
-        stackViewHeightConstraint.active = true
+        stackView.leadingAnchor.constraint(equalTo: readableContentGuide.leadingAnchor, constant: outerMargin).isActive = true
+        stackView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: outerMargin).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: readableContentGuide.trailingAnchor, constant: -outerMargin).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor, constant: -outerMargin).isActive = true
+        stackViewHeightConstraint = stackView.heightAnchor.constraint(equalToConstant: innerHeight)
+        stackViewHeightConstraint.isActive = true
         
         stackView.addArrangedSubview(avatar)
-        avatar.heightAnchor.constraintEqualToAnchor(avatar.widthAnchor).active = true
+        avatar.heightAnchor.constraint(equalTo: avatar.widthAnchor).isActive = true
         
         stackView.addArrangedSubview(name)
         
@@ -146,26 +146,26 @@ private extension AvatarHeader {
         updateName()
     }
     
-    private func updateColors() {
+    func updateColors() {
         topLine.backgroundColor = borderColor
         bottomLine.backgroundColor = borderColor
         name.textColor = textColor
     }
     
-    private func updateSizes() {
+    func updateSizes() {
         topLineHeightConstraint.constant = borderWidth
         bottomLineHeightConstraint.constant = borderWidth
         stackViewHeightConstraint.constant = innerHeight
         stackView.spacing = innerMargin
     }
     
-    private func updateName() {
+    func updateName() {
         avatar.fontName = avatarFontName
         let customFont: UIFont
-        if let fontName = fontName, font = UIFont(name: fontName, size: fontSize) {
+        if let fontName = fontName, let font = UIFont(name: fontName, size: fontSize) {
             customFont = font
         } else {
-            customFont = UIFont.systemFontOfSize(fontSize, weight: UIFontWeightLight)
+            customFont = UIFont.systemFont(ofSize: fontSize, weight: UIFontWeightLight)
         }
         name.font = customFont
     }

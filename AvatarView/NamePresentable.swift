@@ -1,7 +1,7 @@
 /*
  |  _   ____   ____   _
- | ⎛ |‾|  ⚈ |-| ⚈  |‾| ⎞
- | ⎝ |  ‾‾‾‾| |‾‾‾‾  | ⎠
+ | | |‾|  ⚈ |-| ⚈  |‾| |
+ | | |  ‾‾‾‾| |‾‾‾‾  | |
  |  ‾        ‾        ‾
  */
 
@@ -21,13 +21,13 @@ public extension NamePresentable {
         contact.givenName = givenName ?? ""
         contact.familyName = familyName ?? ""
         let fullName: String
-        if let formattedName = CNContactFormatter.stringFromContact(contact, style: .FullName) {
+        if let formattedName = CNContactFormatter.string(from: contact, style: .fullName) {
             fullName = formattedName
         } else {
             let name = givenName ?? ""
             if name.isEmpty {
                 fullName = familyName ?? ""
-            } else if let familyName = familyName where familyName.characters.count > 0 {
+            } else if let familyName = familyName , familyName.characters.count > 0 {
                 fullName = "\(name) \(familyName)"
             } else {
                 fullName = name
@@ -38,16 +38,16 @@ public extension NamePresentable {
     
     public var initials: String {
         var initialsString = String()
-        if let givenName = givenName where givenName.characters.count > 0 {
-            initialsString += givenName.substringToIndex(givenName.startIndex.successor())
+        if let givenName = givenName , givenName.characters.count > 0 {
+            initialsString += givenName.substring(to: givenName.characters.index(after: givenName.startIndex))
         }
-        if let familyName = familyName where familyName.characters.count > 0 {
-            initialsString += familyName.substringToIndex(familyName.startIndex.successor())
+        if let familyName = familyName , familyName.characters.count > 0 {
+            initialsString += familyName.substring(to: familyName.characters.index(after: familyName.startIndex))
         }
         if initialsString.characters.count == 0 {
             initialsString = "?"
         }
-        return initialsString.uppercaseString
+        return initialsString.uppercased()
     }
     
 }
@@ -55,10 +55,10 @@ public extension NamePresentable {
 
 // MARK: - Sorting functions
 
-public extension CollectionType where Self.Generator.Element: NamePresentable {
+public extension Collection where Self.Iterator.Element: NamePresentable {
     
-    public func sortedByName(ascending ascending: Bool = true) -> [Self.Generator.Element] {
-        return self.sort { ascending ? $0.name < $1.name : $0.name > $1.name }
+    public func sortedByName(ascending: Bool = true) -> [Self.Iterator.Element] {
+        return self.sorted { ascending ? $0.name < $1.name : $0.name > $1.name }
     }
     
 }
