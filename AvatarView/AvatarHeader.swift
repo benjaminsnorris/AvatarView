@@ -48,7 +48,7 @@ public typealias AvatarHeaderPresentable = NamePresentable & AvatarPresentable
             updateName()
         }
     }
-
+    
     @IBInspectable open var fontName: String? = nil {
         didSet {
             updateName()
@@ -58,6 +58,13 @@ public typealias AvatarHeaderPresentable = NamePresentable & AvatarPresentable
     @IBInspectable open var fontSize: CGFloat = 17.0 {
         didSet {
             updateName()
+        }
+    }
+    
+    @IBInspectable open var followReadableWidth: Bool = true {
+        didSet {
+            readableContentConstraints.forEach { $0.isActive = followReadableWidth }
+            fullWidthConstraints.forEach { $0.isActive = !followReadableWidth }
         }
     }
     
@@ -88,6 +95,8 @@ public typealias AvatarHeaderPresentable = NamePresentable & AvatarPresentable
     fileprivate var bottomLineHeightConstraint: NSLayoutConstraint!
     fileprivate var stackViewHeightConstraint: NSLayoutConstraint!
     fileprivate var outerMargin: CGFloat = 8
+    fileprivate var readableContentConstraints = [NSLayoutConstraint]()
+    fileprivate var fullWidthConstraints = [NSLayoutConstraint]()
     
     
     // MARK: - Initializers
@@ -126,12 +135,14 @@ private extension AvatarHeader {
         bottomLine.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         bottomLineHeightConstraint = bottomLine.heightAnchor.constraint(equalToConstant: borderWidth)
         bottomLineHeightConstraint.isActive = true
-
+        
         stackView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(stackView)
-        stackView.leadingAnchor.constraint(equalTo: readableContentGuide.leadingAnchor, constant: outerMargin).isActive = true
+        readableContentConstraints.append(stackView.leadingAnchor.constraint(equalTo: readableContentGuide.leadingAnchor, constant: outerMargin))
+        fullWidthConstraints.append(stackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor, constant: outerMargin))
         stackView.topAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: outerMargin).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: readableContentGuide.trailingAnchor, constant: -outerMargin).isActive = true
+        readableContentConstraints.append(stackView.trailingAnchor.constraint(equalTo: readableContentGuide.trailingAnchor, constant: -outerMargin))
+        fullWidthConstraints.append(stackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor, constant: -outerMargin))
         stackView.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor, constant: -outerMargin).isActive = true
         stackViewHeightConstraint = stackView.heightAnchor.constraint(equalToConstant: innerHeight)
         stackViewHeightConstraint.isActive = true
@@ -141,6 +152,7 @@ private extension AvatarHeader {
         
         stackView.addArrangedSubview(name)
         
+        followReadableWidth = true
         updateColors()
         updateSizes()
         updateName()
