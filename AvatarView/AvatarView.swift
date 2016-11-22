@@ -137,9 +137,12 @@ public protocol AvatarPresentable {
     
     open func update(with presenter: AvatarPresentable) {
         initials = presenter.initialsString
-        image = presenter.image
-        if let imageURL = presenter.imageURL {
+        if let image = presenter.image {
+            self.image = image
+        } else if let imageURL = presenter.imageURL {
             imageView.kf.setImage(with: imageURL)
+        } else {
+            image = nil
         }
     }
     
