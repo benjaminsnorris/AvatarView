@@ -6,10 +6,12 @@
  */
 
 import UIKit
+import Kingfisher
 
 public protocol AvatarPresentable {
     var initialsString: String? { get }
     var image: UIImage? { get }
+    var imageURL: URL? { get }
 }
 
 @IBDesignable open class AvatarView: UIView {
@@ -136,6 +138,9 @@ public protocol AvatarPresentable {
     open func update(with presenter: AvatarPresentable) {
         initials = presenter.initialsString
         image = presenter.image
+        if let imageURL = presenter.imageURL {
+            imageView.kf.setImage(with: imageURL)
+        }
     }
     
 }
