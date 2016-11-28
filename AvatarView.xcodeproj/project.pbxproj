@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		705E7D2D1DE4A1C1002AB0FF /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 705E7D2C1DE4A1C1002AB0FF /* Kingfisher.framework */; };
+		70613EDA1DECD8A30023E0C7 /* AvatarImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70613ED91DECD8A30023E0C7 /* AvatarImageService.swift */; };
 		7096370D1D00A939006884B8 /* NamePresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7096370C1D00A939006884B8 /* NamePresentable.swift */; };
 		70B7E0F01D8AD1800010220B /* AvatarHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B7E0EF1D8AD1800010220B /* AvatarHeader.swift */; };
 		70F4CDE71CFFA22200A6F8BF /* AvatarView.h in Headers */ = {isa = PBXBuildFile; fileRef = 70F4CDE61CFFA22200A6F8BF /* AvatarView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -27,7 +28,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		705E7D2C1DE4A1C1002AB0FF /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Kingfisher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		705E7D2C1DE4A1C1002AB0FF /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Kingfisher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		70613ED91DECD8A30023E0C7 /* AvatarImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarImageService.swift; sourceTree = "<group>"; };
 		7096370C1D00A939006884B8 /* NamePresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamePresentable.swift; sourceTree = "<group>"; };
 		70B7E0EF1D8AD1800010220B /* AvatarHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarHeader.swift; sourceTree = "<group>"; };
 		70F4CDE31CFFA22200A6F8BF /* AvatarView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AvatarView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,6 +95,7 @@
 				70F4CDFD1CFFA27400A6F8BF /* AvatarView.swift */,
 				70B7E0EF1D8AD1800010220B /* AvatarHeader.swift */,
 				7096370C1D00A939006884B8 /* NamePresentable.swift */,
+				70613ED91DECD8A30023E0C7 /* AvatarImageService.swift */,
 				70F4CDE81CFFA22200A6F8BF /* Info.plist */,
 			);
 			path = AvatarView;
@@ -219,6 +222,7 @@
 			files = (
 				7096370D1D00A939006884B8 /* NamePresentable.swift in Sources */,
 				70B7E0F01D8AD1800010220B /* AvatarHeader.swift in Sources */,
+				70613EDA1DECD8A30023E0C7 /* AvatarImageService.swift in Sources */,
 				70F4CDFE1CFFA27400A6F8BF /* AvatarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
