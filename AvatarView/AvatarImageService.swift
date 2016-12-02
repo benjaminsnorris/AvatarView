@@ -22,10 +22,9 @@ open class AvatarImageService: NSObject {
     
     // MARK: - Initializers
     
-    required public init(viewController: UIViewController, delegate: AvatarImageServiceDelegate, statusBarStyle: UIStatusBarStyle = .default) {
+    required public init(viewController: UIViewController, delegate: AvatarImageServiceDelegate) {
         self.viewController = viewController
         self.delegate = delegate
-        AvatarImageService.statusBarStyle = statusBarStyle
         super.init()
     }
     
@@ -33,6 +32,7 @@ open class AvatarImageService: NSObject {
     // MARK: - Public functions
     
     public func presentImageOptions(from sender: Any?, existingPhoto: Bool = false, tintColor: UIColor? = nil, statusBarStyle: UIStatusBarStyle = .default) {
+        AvatarImageService.statusBarStyle = statusBarStyle
         let actionSheet = UIAlertController(title: NSLocalizedString("Avatar image options", comment: "Name of action sheet with options to edit avatar image"), message: nil, preferredStyle: .actionSheet)
         if let tintColor = tintColor {
             actionSheet.view.tintColor = tintColor
