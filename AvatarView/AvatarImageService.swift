@@ -17,20 +17,22 @@ open class AvatarImageService: NSObject {
     
     let viewController: UIViewController
     let delegate: AvatarImageServiceDelegate
+    static var statusBarStyle = UIStatusBarStyle.default
     
     
     // MARK: - Initializers
     
-    required public init(viewController: UIViewController, delegate: AvatarImageServiceDelegate) {
+    required public init(viewController: UIViewController, delegate: AvatarImageServiceDelegate, statusBarStyle: UIStatusBarStyle = .default) {
         self.viewController = viewController
         self.delegate = delegate
+        AvatarImageService.statusBarStyle = statusBarStyle
         super.init()
     }
     
     
     // MARK: - Public functions
     
-    public func presentImageOptions(from sender: Any?, existingPhoto: Bool = false, tintColor: UIColor? = nil) {
+    public func presentImageOptions(from sender: Any?, existingPhoto: Bool = false, tintColor: UIColor? = nil, statusBarStyle: UIStatusBarStyle = .default) {
         let actionSheet = UIAlertController(title: NSLocalizedString("Avatar image options", comment: "Name of action sheet with options to edit avatar image"), message: nil, preferredStyle: .actionSheet)
         if let tintColor = tintColor {
             actionSheet.view.tintColor = tintColor
@@ -85,7 +87,7 @@ extension AvatarImageService: UIImagePickerControllerDelegate, UINavigationContr
 private extension AvatarImageService {
     
     func pickImage(fromLibrary: Bool, sender: Any? = nil) {
-        let imagePicker = UIImagePickerController()
+        let imagePicker = CustomStatusBarImagePickerController()
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
         
@@ -105,6 +107,17 @@ private extension AvatarImageService {
         }
         
         viewController.present(imagePicker, animated: true, completion: nil)
+    }
+    
+}
+
+
+// MARK: - Light status bar image picker
+
+private final class CustomStatusBarImagePickerController: UIImagePickerController {
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return AvatarImageService.statusBarStyle
     }
     
 }
