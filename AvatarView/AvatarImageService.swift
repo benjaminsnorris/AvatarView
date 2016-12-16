@@ -9,6 +9,7 @@ import UIKit
 
 public protocol AvatarImageServiceDelegate: class {
     func updateImage(with image: UIImage?)
+    func updateFromContact(with image: UIImage?, firstName: String?, lastName: String?)
 }
 
 open class AvatarImageService: NSObject {
@@ -31,9 +32,19 @@ open class AvatarImageService: NSObject {
     
     // MARK: - Public functions
     
-    public func presentImageOptions(from sender: Any?, existingPhoto: Bool = false, tintColor: UIColor? = nil, statusBarStyle: UIStatusBarStyle = .default) {
+    public func presentImageOptions(from sender: Any?, existingPhoto: Bool = false, namedPerson: NamePresentable? = nil, tintColor: UIColor? = nil, statusBarStyle: UIStatusBarStyle = .default) {
         AvatarImageService.statusBarStyle = statusBarStyle
-        let actionSheet = UIAlertController(title: NSLocalizedString("Avatar image options", comment: "Name of action sheet with options to edit avatar image"), message: nil, preferredStyle: .actionSheet)
+        let title: String
+        if let namedPerson = namedPerson {
+            if existingPhoto {
+                title = String.localizedStringWithFormat(NSLocalizedString("Update photo for %@", comment: "Parameter is person's name"), namedPerson.name)
+            } else {
+                title = String.localizedStringWithFormat(NSLocalizedString("Add photo for %@", comment: "Parameter is person's name"), namedPerson.name)
+            }
+        } else {
+            title = NSLocalizedString("Avatar image options", comment: "Name of action sheet with options to edit avatar image")
+        }
+        let actionSheet = UIAlertController(title: title, message: nil, preferredStyle: .actionSheet)
         if let tintColor = tintColor {
             actionSheet.view.tintColor = tintColor
         }
@@ -48,6 +59,11 @@ open class AvatarImageService: NSObject {
         actionSheet.addAction(UIAlertAction(title: NSLocalizedString("Choose from library", comment: "Action title to take a new photo"), style: .default) { _ in
             self.pickImage(fromLibrary: true, sender: sender)
         })
+        actionSheet.addAction(UIAlertAction(title: "Choose from Contacts", style: .default, handler: { (action) -> Void in
+            let contactPicker = ContactPicker(viewController: self.viewController, delegate: self)
+            contactPicker.photoRequired = true
+            contactPicker.showContactPicker()
+        }))
         if existingPhoto {
             actionSheet.addAction(UIAlertAction(title: NSLocalizedString("Remove photo", comment: "Action title to remove photo"), style: .destructive) { _ in
                 self.delegate.updateImage(with: nil)
@@ -77,6 +93,21 @@ extension AvatarImageService: UIImagePickerControllerDelegate, UINavigationContr
         }
         guard let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage else { return }
         delegate.updateImage(with: editedImage)
+    }
+    
+}
+
+
+// MARK: - Contact picker delegate
+
+extension AvatarImageService: ContactPickerDelegate {
+    
+    func contactSelected(_ firstName: String?, lastName: String?, photoData: Data?) {
+        var image: UIImage?
+        if let photoData = photoData {
+            image = UIImage(data: photoData)
+        }
+        delegate.updateFromContact(with: image, firstName: firstName, lastName: lastName)
     }
     
 }

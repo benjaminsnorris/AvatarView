@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		705E42811E048C2100CA7C50 /* ContactPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705E42801E048C2100CA7C50 /* ContactPicker.swift */; };
 		705E7D2D1DE4A1C1002AB0FF /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 705E7D2C1DE4A1C1002AB0FF /* Kingfisher.framework */; };
 		70613EDA1DECD8A30023E0C7 /* AvatarImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70613ED91DECD8A30023E0C7 /* AvatarImageService.swift */; };
 		7096370D1D00A939006884B8 /* NamePresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7096370C1D00A939006884B8 /* NamePresentable.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		705E42801E048C2100CA7C50 /* ContactPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactPicker.swift; sourceTree = "<group>"; };
 		705E7D2C1DE4A1C1002AB0FF /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Kingfisher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70613ED91DECD8A30023E0C7 /* AvatarImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarImageService.swift; sourceTree = "<group>"; };
 		7096370C1D00A939006884B8 /* NamePresentable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamePresentable.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				70B7E0EF1D8AD1800010220B /* AvatarHeader.swift */,
 				7096370C1D00A939006884B8 /* NamePresentable.swift */,
 				70613ED91DECD8A30023E0C7 /* AvatarImageService.swift */,
+				705E42801E048C2100CA7C50 /* ContactPicker.swift */,
 				70F4CDE81CFFA22200A6F8BF /* Info.plist */,
 			);
 			path = AvatarView;
@@ -220,6 +223,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				705E42811E048C2100CA7C50 /* ContactPicker.swift in Sources */,
 				7096370D1D00A939006884B8 /* NamePresentable.swift in Sources */,
 				70B7E0F01D8AD1800010220B /* AvatarHeader.swift in Sources */,
 				70613EDA1DECD8A30023E0C7 /* AvatarImageService.swift in Sources */,
