@@ -9,7 +9,7 @@ import UIKit
 
 public protocol AvatarImageServiceDelegate: class {
     func updateImage(with image: UIImage?)
-    func updateFromContact(with image: UIImage?, firstName: String?, lastName: String?)
+    func updateFromContact(with photoData: Data?, and thumbnailData: Data?)
 }
 
 open class AvatarImageService: NSObject {
@@ -60,8 +60,7 @@ open class AvatarImageService: NSObject {
             self.pickImage(fromLibrary: true, sender: sender)
         })
         actionSheet.addAction(UIAlertAction(title: "Choose from Contacts", style: .default, handler: { (action) -> Void in
-            let contactPicker = ContactPicker(viewController: self.viewController, delegate: self)
-            contactPicker.photoRequired = true
+            let contactPicker = ContactPicker(viewController: self.viewController, delegate: self, photoRequired: true)
             contactPicker.showContactPicker()
         }))
         if existingPhoto {
@@ -102,12 +101,8 @@ extension AvatarImageService: UIImagePickerControllerDelegate, UINavigationContr
 
 extension AvatarImageService: ContactPickerDelegate {
     
-    func contactSelected(_ firstName: String?, lastName: String?, photoData: Data?) {
-        var image: UIImage?
-        if let photoData = photoData {
-            image = UIImage(data: photoData)
-        }
-        delegate.updateFromContact(with: image, firstName: firstName, lastName: lastName)
+    public func contactSelected(with firstName: String?, lastName: String?, photoData: Data?, thumbnailData: Data?) {
+        delegate.updateFromContact(with: photoData, and: thumbnailData)
     }
     
 }

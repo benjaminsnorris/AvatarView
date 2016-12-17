@@ -8,23 +8,32 @@
 import UIKit
 import ContactsUI
 
-protocol ContactPickerDelegate {
-    func contactSelected(_ firstName: String?, lastName: String?, photoData: Data?)
+public protocol ContactPickerDelegate {
+    func contactSelected(with firstName: String?, lastName: String?, photoData: Data?, thumbnailData: Data?)
 }
 
-class ContactPicker: NSObject {
+open class ContactPicker: NSObject {
+    
+    // MARK: - Internal properties
     
     let viewController: UIViewController
     let delegate: ContactPickerDelegate
-    var photoRequired = false
+    let photoRequired: Bool
     
-    init(viewController: UIViewController, delegate: ContactPickerDelegate) {
+    
+    // MARK: - Initializer
+    
+    public init(viewController: UIViewController, delegate: ContactPickerDelegate, photoRequired: Bool = false) {
         self.viewController = viewController
         self.delegate = delegate
+        self.photoRequired = photoRequired
         super.init()
     }
     
-    func showContactPicker() {
+    
+    // MARK: - Public functions
+    
+    public func showContactPicker() {
         let picker = CNContactPickerViewController()
         picker.delegate = self
         let contactPredicate = photoRequired ? "(imageData != nil)" : "(givenName != '') OR (familyName != '')"
@@ -40,17 +49,19 @@ class ContactPicker: NSObject {
 
 extension ContactPicker: CNContactPickerDelegate {
     
-    func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
+    public func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
         var firstName = contact.givenName.characters.count > 0 ? contact.givenName : contact.familyName
         if contact.middleName.characters.count > 0 {
             firstName += " \(contact.middleName)"
         }
         let lastName: String? = contact.familyName == firstName ? nil : contact.familyName
         var photoData: Data?
-        if let thumbnailImageData = contact.thumbnailImageData , contact.imageDataAvailable {
-            photoData = thumbnailImageData
+        var thumbnailData: Data?
+        if contact.imageDataAvailable {
+            photoData = contact.imageData
+            thumbnailData = contact.thumbnailImageData
         }
-        delegate.contactSelected(firstName, lastName: lastName, photoData: photoData)
+        delegate.contactSelected(with: firstName, lastName: lastName, photoData: photoData, thumbnailData: thumbnailData)
     }
     
 }
