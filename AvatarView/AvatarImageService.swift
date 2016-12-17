@@ -61,7 +61,7 @@ open class AvatarImageService: NSObject {
         })
         actionSheet.addAction(UIAlertAction(title: "Choose from Contacts", style: .default, handler: { (action) -> Void in
             let contactPicker = ContactPicker(viewController: self.viewController, delegate: self, photoRequired: true)
-            contactPicker.showContactPicker()
+            contactPicker.showContactPicker(from: sender)
         }))
         if existingPhoto {
             actionSheet.addAction(UIAlertAction(title: NSLocalizedString("Remove photo", comment: "Action title to remove photo"), style: .destructive) { _ in

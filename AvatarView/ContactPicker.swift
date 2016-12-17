@@ -33,12 +33,18 @@ open class ContactPicker: NSObject {
     
     // MARK: - Public functions
     
-    public func showContactPicker() {
+    public func showContactPicker(from sender: Any?) {
         let picker = CNContactPickerViewController()
         picker.delegate = self
         let contactPredicate = photoRequired ? "(imageData != nil)" : "(givenName != '') OR (familyName != '')"
         picker.predicateForEnablingContact = NSPredicate(format: contactPredicate, argumentArray: nil)
         picker.modalPresentationStyle = .overCurrentContext
+        if let barButtonItem = sender as? UIBarButtonItem {
+            picker.popoverPresentationController?.barButtonItem = barButtonItem
+        } else if let view = sender as? UIView {
+            picker.popoverPresentationController?.sourceView = view.superview
+            picker.popoverPresentationController?.sourceRect = view.frame
+        }
         viewController.present(picker, animated: true, completion: nil)
     }
     
