@@ -56,7 +56,7 @@ open class AvatarImageService: NSObject {
                 self.pickImage(fromLibrary: false)
             })
         }
-        actionSheet.addAction(UIAlertAction(title: NSLocalizedString("Choose from library", comment: "Action title to take a new photo"), style: .default) { _ in
+        actionSheet.addAction(UIAlertAction(title: NSLocalizedString("Choose from Photos", comment: "Action title to take a new photo"), style: .default) { _ in
             self.pickImage(fromLibrary: true, sender: sender)
         })
         actionSheet.addAction(UIAlertAction(title: "Choose from Contacts", style: .default, handler: { (action) -> Void in
