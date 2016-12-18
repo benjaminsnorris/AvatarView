@@ -19,6 +19,7 @@ open class AvatarImageService: NSObject {
     let viewController: UIViewController
     let delegate: AvatarImageServiceDelegate
     static var statusBarStyle = UIStatusBarStyle.default
+    var contactPicker: ContactPicker!
     
     
     // MARK: - Initializers
@@ -27,6 +28,7 @@ open class AvatarImageService: NSObject {
         self.viewController = viewController
         self.delegate = delegate
         super.init()
+        contactPicker = ContactPicker(viewController: self.viewController, delegate: self, photoRequired: true)
     }
     
     
@@ -60,8 +62,7 @@ open class AvatarImageService: NSObject {
             self.pickImage(fromLibrary: true, sender: sender)
         })
         actionSheet.addAction(UIAlertAction(title: "Choose from Contacts", style: .default, handler: { (action) -> Void in
-            let contactPicker = ContactPicker(viewController: self.viewController, delegate: self, photoRequired: true)
-            contactPicker.showContactPicker(from: sender)
+            self.contactPicker.showContactPicker(from: sender)
         }))
         if existingPhoto {
             actionSheet.addAction(UIAlertAction(title: NSLocalizedString("Remove photo", comment: "Action title to remove photo"), style: .destructive) { _ in
