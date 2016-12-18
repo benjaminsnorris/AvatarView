@@ -38,6 +38,7 @@ open class ContactPicker: NSObject {
         picker.delegate = self
         let contactPredicate = photoRequired ? "(imageData != nil)" : "(givenName != '') OR (familyName != '')"
         picker.predicateForEnablingContact = NSPredicate(format: contactPredicate, argumentArray: nil)
+        picker.predicateForSelectionOfContact = NSPredicate(format: contactPredicate, argumentArray: nil)
         picker.modalPresentationStyle = .overCurrentContext
         if let barButtonItem = sender as? UIBarButtonItem {
             picker.popoverPresentationController?.barButtonItem = barButtonItem
