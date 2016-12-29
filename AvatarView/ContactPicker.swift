@@ -9,7 +9,7 @@ import UIKit
 import ContactsUI
 
 public protocol ContactPickerDelegate {
-    func contactSelected(with firstName: String?, lastName: String?, photoData: Data?, thumbnailData: Data?)
+    func contactSelected(_ contact: CNContact, firstName: String?, lastName: String?, photoData: Data?, thumbnailData: Data?)
 }
 
 open class ContactPicker: NSObject {
@@ -67,7 +67,7 @@ extension ContactPicker: CNContactPickerDelegate {
             photoData = contact.imageData
             thumbnailData = contact.thumbnailImageData
         }
-        delegate.contactSelected(with: firstName, lastName: lastName, photoData: photoData, thumbnailData: thumbnailData)
+        delegate.contactSelected(contact, firstName: firstName, lastName: lastName, photoData: photoData, thumbnailData: thumbnailData)
     }
     
 }

@@ -6,6 +6,7 @@
  */
 
 import UIKit
+import Contacts
 
 public protocol AvatarImageServiceDelegate: class {
     func updateImage(with image: UIImage?)
@@ -102,7 +103,7 @@ extension AvatarImageService: UIImagePickerControllerDelegate, UINavigationContr
 
 extension AvatarImageService: ContactPickerDelegate {
     
-    public func contactSelected(with firstName: String?, lastName: String?, photoData: Data?, thumbnailData: Data?) {
+    public func contactSelected(_ contact: CNContact, firstName: String?, lastName: String?, photoData: Data?, thumbnailData: Data?) {
         delegate.updateFromContact(with: photoData, and: thumbnailData)
     }
     
