@@ -13,6 +13,12 @@ public typealias AvatarHeaderPresentable = NamePresentable & AvatarPresentable
     
     // MARK: - Inspectable properties
     
+    @IBInspectable open var initialText: String? {
+        didSet {
+            name.text = initialText
+        }
+    }
+    
     @IBInspectable open var borderColor: UIColor = UIColor(red: 29 / 255.0, green: 30 / 255.0, blue: 29 / 255.0, alpha: 1.0) {
         didSet {
             updateColors()
@@ -78,7 +84,7 @@ public typealias AvatarHeaderPresentable = NamePresentable & AvatarPresentable
                 name.text = person.name
             } else {
                 avatar.reset()
-                name.text = nil
+                name.text = initialText
             }
         }
     }
