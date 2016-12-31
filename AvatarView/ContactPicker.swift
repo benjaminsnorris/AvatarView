@@ -33,7 +33,7 @@ open class ContactPicker: NSObject {
     
     // MARK: - Public functions
     
-    public func showContactPicker(from sender: Any?) {
+    public func showContactPicker(from sender: Any?, completion: (() -> Void)? = nil) {
         let picker = CNContactPickerViewController()
         picker.delegate = self
         let contactPredicate = photoRequired ? "(imageData != nil)" : "(givenName != '') OR (familyName != '')"
@@ -45,7 +45,9 @@ open class ContactPicker: NSObject {
             picker.popoverPresentationController?.sourceView = view.superview
             picker.popoverPresentationController?.sourceRect = view.frame
         }
-        viewController.present(picker, animated: true, completion: nil)
+        viewController.present(picker, animated: true) { _ in
+            completion?()
+        }
     }
     
 }
