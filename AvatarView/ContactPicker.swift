@@ -10,6 +10,7 @@ import ContactsUI
 
 public protocol ContactPickerDelegate {
     func contactSelected(_ contact: CNContact, firstName: String?, lastName: String?, photoData: Data?, thumbnailData: Data?)
+    func contactPickerCanceled()
 }
 
 open class ContactPicker: NSObject {
@@ -70,6 +71,10 @@ extension ContactPicker: CNContactPickerDelegate {
             thumbnailData = contact.thumbnailImageData
         }
         delegate.contactSelected(contact, firstName: firstName, lastName: lastName, photoData: photoData, thumbnailData: thumbnailData)
+    }
+    
+    public func contactPickerDidCancel(_ picker: CNContactPickerViewController) {
+        delegate.contactPickerCanceled()
     }
     
 }

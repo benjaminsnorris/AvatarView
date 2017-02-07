@@ -102,6 +102,10 @@ extension AvatarImageService: UIImagePickerControllerDelegate, UINavigationContr
 // MARK: - Contact picker delegate
 
 extension AvatarImageService: ContactPickerDelegate {
+
+    public func contactPickerCanceled() {
+        // Do nothing
+    }
     
     public func contactSelected(_ contact: CNContact, firstName: String?, lastName: String?, photoData: Data?, thumbnailData: Data?) {
         delegate.updateFromContact(with: photoData, and: thumbnailData)
