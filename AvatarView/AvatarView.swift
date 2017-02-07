@@ -136,7 +136,11 @@ public protocol AvatarPresentable {
     }
     
     open func update(with presenter: AvatarPresentable) {
-        initials = presenter.initialsString
+        if let initialsString = presenter.initialsString, CharacterSet.letters.isSuperset(of: CharacterSet(charactersIn: initialsString)) {
+            initials = initialsString
+        } else {
+            initials = nil
+        }
         if let image = presenter.image {
             self.image = image
         } else if let imageURL = presenter.imageURL {
