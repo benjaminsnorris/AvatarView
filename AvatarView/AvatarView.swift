@@ -136,8 +136,12 @@ public protocol AvatarPresentable {
     }
     
     open func update(with presenter: AvatarPresentable) {
-        if let initialsString = presenter.initialsString, CharacterSet.letters.isSuperset(of: CharacterSet(charactersIn: initialsString)) {
-            initials = initialsString
+        if let initialsString = presenter.initialsString, !initialsString.characters.isEmpty {
+            if CharacterSet.letters.isSuperset(of: CharacterSet(charactersIn: initialsString)) {
+                initials = initialsString
+            } else {
+                initials = "#"
+            }
         } else {
             initials = nil
         }
