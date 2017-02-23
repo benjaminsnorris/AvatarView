@@ -212,7 +212,7 @@ private extension AvatarView {
         } else {
             customFont = UIFont.systemFont(ofSize: fontSize, weight: UIFontWeightLight)
         }
-        initialsLabel.text = initials
+        initialsLabel.text = initials?.trimmingCharacters(in: CharacterSet.whitespaces)
         initialsLabel.font = customFont
     }
     
