@@ -61,4 +61,18 @@ public extension Collection where Self.Iterator.Element: NamePresentable {
         return self.sorted { ascending ? $0.name < $1.name : $0.name > $1.name }
     }
     
+    public func sortedByGivenName(ascending: Bool = true) -> [Self.Iterator.Element] {
+        return self.sorted { first, second in
+            guard let firstName = first.givenName, !firstName.characters.isEmpty, let secondName = second.givenName, !secondName.characters.isEmpty else { return ascending }
+            return ascending ? firstName < secondName : firstName > secondName
+        }
+    }
+    
+    public func sortedByFamilyName(ascending: Bool = true) -> [Self.Iterator.Element] {
+        return self.sorted { first, second in
+            guard let firstName = first.familyName, !firstName.characters.isEmpty, let secondName = second.familyName, !secondName.characters.isEmpty else { return ascending }
+            return ascending ? firstName < secondName : firstName > secondName
+        }
+    }
+    
 }
