@@ -176,8 +176,10 @@ private extension AvatarView {
         
         initialsLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         initialsLeadingConstraint = initialsLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: innerMargin)
+        initialsLeadingConstraint.priority = 999
         initialsLeadingConstraint.isActive = true
         initialsTrailingConstraint = trailingAnchor.constraint(equalTo: initialsLabel.trailingAnchor, constant: innerMargin)
+        initialsTrailingConstraint.priority = 999
         initialsTrailingConstraint.isActive = true
         
         // Add image as an overlay to hide initials once it's been added
