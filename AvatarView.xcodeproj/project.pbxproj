@@ -16,6 +16,7 @@
 		70F4CDEE1CFFA22200A6F8BF /* AvatarView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70F4CDE31CFFA22200A6F8BF /* AvatarView.framework */; };
 		70F4CDF31CFFA22200A6F8BF /* AvatarViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F4CDF21CFFA22200A6F8BF /* AvatarViewTests.swift */; };
 		70F4CDFE1CFFA27400A6F8BF /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F4CDFD1CFFA27400A6F8BF /* AvatarView.swift */; };
+		A15D5DAF1EE0B04200C8F309 /* DoubleAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D5DAE1EE0B04200C8F309 /* DoubleAvatarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,7 @@
 		70F4CDF21CFFA22200A6F8BF /* AvatarViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarViewTests.swift; sourceTree = "<group>"; };
 		70F4CDF41CFFA22200A6F8BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70F4CDFD1CFFA27400A6F8BF /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
+		A15D5DAE1EE0B04200C8F309 /* DoubleAvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleAvatarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				70F4CDE61CFFA22200A6F8BF /* AvatarView.h */,
+				A15D5DAE1EE0B04200C8F309 /* DoubleAvatarView.swift */,
 				70F4CDFD1CFFA27400A6F8BF /* AvatarView.swift */,
 				70B7E0EF1D8AD1800010220B /* AvatarHeader.swift */,
 				7096370C1D00A939006884B8 /* NamePresentable.swift */,
@@ -223,6 +226,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A15D5DAF1EE0B04200C8F309 /* DoubleAvatarView.swift in Sources */,
 				705E42811E048C2100CA7C50 /* ContactPicker.swift in Sources */,
 				7096370D1D00A939006884B8 /* NamePresentable.swift in Sources */,
 				70B7E0F01D8AD1800010220B /* AvatarHeader.swift in Sources */,
