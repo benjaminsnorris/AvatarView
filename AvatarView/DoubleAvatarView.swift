@@ -71,15 +71,15 @@ import UIKit
         }
     }
     
-    @IBInspectable open var secondaryOverlap: CGFloat = 8 {
+    @IBInspectable open var secondaryOverlap: CGFloat = 16 {
         didSet {
-            updateConditionalConstraints()
+            updateAllConstraints()
         }
     }
     
     @IBInspectable open var isOnRight = true {
         didSet {
-            updateConditionalConstraints()
+            updateAllConstraints()
         }
     }
     
@@ -144,28 +144,7 @@ private extension DoubleAvatarView {
         addSubview(primaryAvatarView)
         secondaryBorderView.addSubview(secondaryAvatarView)
         addSubview(secondaryBorderView)
-
-        
-        //Aspect ratio
-        addConstraint(primaryAvatarView.heightAnchor.constraint(equalTo: primaryAvatarView.widthAnchor))
-        addConstraint(primaryAvatarView.widthAnchor.constraint(equalToConstant: primaryAvatarWidth(fromSuperFrame: frame)))
-        addConstraint(secondaryAvatarView.heightAnchor.constraint(equalTo: secondaryAvatarView.widthAnchor))
-        secondaryHeightConstraint = secondaryAvatarView.heightAnchor.constraint(equalTo: primaryAvatarView.heightAnchor, multiplier: secondarySizePercentage)
-        addConstraint(secondaryHeightConstraint!)
-
-        // Secondary <-> Superview
-        let padding: CGFloat = 4.0
-        addConstraint(secondaryAvatarView.leadingAnchor.constraint(equalTo: secondaryBorderView.leadingAnchor, constant: padding))
-        addConstraint(secondaryAvatarView.topAnchor.constraint(equalTo: secondaryBorderView.topAnchor, constant: padding))
-        addConstraint(secondaryAvatarView.trailingAnchor.constraint(equalTo: secondaryBorderView.trailingAnchor, constant: padding))
-    addConstraint(secondaryAvatarView.bottomAnchor.constraint(equalTo: secondaryBorderView.bottomAnchor, constant: padding))
-        
-        //Primary <-> superview
-        addConstraint(topAnchor.constraint(equalTo: primaryAvatarView.topAnchor))
-        
-        //Secondary <-> Primary
-        addConstraint(primaryAvatarView.bottomAnchor.constraint(equalTo: secondaryBorderView.topAnchor, constant: secondaryOverlap))
-        updateConditionalConstraints()
+        updateAllConstraints()
     }
     
     func primaryAvatarWidth(fromSuperFrame frame: CGRect) -> CGFloat {
@@ -173,20 +152,35 @@ private extension DoubleAvatarView {
         return (smaller + secondaryOverlap) / (1 + secondarySizePercentage)
     }
     
-    func updateConditionalConstraints() {
-        // Primary <-> superview
-        let primaryLeading = leadingAnchor.constraint(equalTo: primaryAvatarView.leadingAnchor)
-        let primaryTrailing = trailingAnchor.constraint(equalTo: primaryAvatarView.trailingAnchor)
-        primaryLeading.isActive = isOnRight
-        primaryTrailing.isActive = !isOnRight
+    func updateAllConstraints() {
+        //Aspect ratio
+        addConstraint(primaryAvatarView.heightAnchor.constraint(equalTo: primaryAvatarView.widthAnchor))
+        addConstraint(primaryAvatarView.widthAnchor.constraint(equalToConstant: primaryAvatarWidth(fromSuperFrame: frame)))
         
-        // Secondary <-> superview
+        addConstraint(secondaryBorderView.heightAnchor.constraint(equalTo: secondaryBorderView.widthAnchor))
+        secondaryHeightConstraint = secondaryBorderView.heightAnchor.constraint(equalTo: primaryAvatarView.heightAnchor, multiplier: secondarySizePercentage)
+        addConstraint(secondaryHeightConstraint!)
+        
+        // SecondaryAvatar <-> Superview (SecondaryBorder)
+        let padding: CGFloat = 2.0
+        addConstraint(secondaryAvatarView.leadingAnchor.constraint(equalTo: secondaryBorderView.leadingAnchor, constant: padding))
+        addConstraint(secondaryAvatarView.topAnchor.constraint(equalTo: secondaryBorderView.topAnchor, constant: padding))
+        addConstraint(secondaryAvatarView.trailingAnchor.constraint(equalTo: secondaryBorderView.trailingAnchor, constant: -padding))
+        addConstraint(secondaryAvatarView.bottomAnchor.constraint(equalTo: secondaryBorderView.bottomAnchor, constant: -padding))
         let secondaryLeading = leadingAnchor.constraint(equalTo: secondaryBorderView.leadingAnchor)
         let secondaryTrailing = trailingAnchor.constraint(equalTo: secondaryBorderView.trailingAnchor)
         secondaryLeading.isActive = !isOnRight
         secondaryTrailing.isActive = isOnRight
         
-        // Primary <-> Secondary
+        //Primary <-> superview
+        addConstraint(topAnchor.constraint(equalTo: primaryAvatarView.topAnchor))
+        let primaryLeading = leadingAnchor.constraint(equalTo: primaryAvatarView.leadingAnchor)
+        let primaryTrailing = trailingAnchor.constraint(equalTo: primaryAvatarView.trailingAnchor)
+        primaryLeading.isActive = isOnRight
+        primaryTrailing.isActive = !isOnRight
+        
+        //Secondary <-> Primary
+        addConstraint(primaryAvatarView.bottomAnchor.constraint(equalTo: secondaryBorderView.topAnchor, constant: secondaryOverlap * 0.75)) // So secondary is a little more towards the center
         let secondaryInnerLeading = secondaryBorderView.leadingAnchor.constraint(equalTo: primaryAvatarView.trailingAnchor, constant: secondaryOverlap)
         let secondaryInnerTrailing = secondaryBorderView.trailingAnchor.constraint(equalTo: primaryAvatarView.leadingAnchor, constant: secondaryOverlap)
         secondaryInnerLeading.isActive = isOnRight
@@ -195,7 +189,7 @@ private extension DoubleAvatarView {
     
     func updateSize() {
         let sizePercent = min(secondarySizePercentage, 1)
-        secondaryHeightConstraint?.constant = primaryAvatarView.bounds.size.height * sizePercent
+        secondaryHeightConstraint?.constant = primaryAvatarView.frame.size.height * sizePercent
         layoutIfNeeded()
     }
     
