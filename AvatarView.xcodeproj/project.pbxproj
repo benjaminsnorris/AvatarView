@@ -41,6 +41,7 @@
 		70F4CDF21CFFA22200A6F8BF /* AvatarViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarViewTests.swift; sourceTree = "<group>"; };
 		70F4CDF41CFFA22200A6F8BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70F4CDFD1CFFA27400A6F8BF /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
+		E7955E481F0D8CF600B8E7ED /* AvatarView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AvatarView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +58,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				70F4CDEE1CFFA22200A6F8BF /* AvatarView.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7955E441F0D8CF600B8E7ED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +94,7 @@
 			children = (
 				70F4CDE31CFFA22200A6F8BF /* AvatarView.framework */,
 				70F4CDED1CFFA22200A6F8BF /* AvatarViewTests.xctest */,
+				E7955E481F0D8CF600B8E7ED /* AvatarView.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -121,6 +130,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				70F4CDE71CFFA22200A6F8BF /* AvatarView.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7955E451F0D8CF600B8E7ED /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,6 +179,24 @@
 			productReference = 70F4CDED1CFFA22200A6F8BF /* AvatarViewTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		E7955E471F0D8CF600B8E7ED /* AvatarView-watchOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E7955E4F1F0D8CF700B8E7ED /* Build configuration list for PBXNativeTarget "AvatarView-watchOS" */;
+			buildPhases = (
+				E7955E431F0D8CF600B8E7ED /* Sources */,
+				E7955E441F0D8CF600B8E7ED /* Frameworks */,
+				E7955E451F0D8CF600B8E7ED /* Headers */,
+				E7955E461F0D8CF600B8E7ED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "AvatarView-watchOS";
+			productName = "AvatarView-watchOS";
+			productReference = E7955E481F0D8CF600B8E7ED /* AvatarView.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -181,6 +215,11 @@
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 0800;
 					};
+					E7955E471F0D8CF600B8E7ED = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = M9Y5WF87VL;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 70F4CDDD1CFFA22200A6F8BF /* Build configuration list for PBXProject "AvatarView" */;
@@ -197,6 +236,7 @@
 			targets = (
 				70F4CDE21CFFA22200A6F8BF /* AvatarView */,
 				70F4CDEC1CFFA22200A6F8BF /* AvatarViewTests */,
+				E7955E471F0D8CF600B8E7ED /* AvatarView-watchOS */,
 			);
 		};
 /* End PBXProject section */
@@ -210,6 +250,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		70F4CDEB1CFFA22200A6F8BF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7955E461F0D8CF600B8E7ED /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -236,6 +283,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				70F4CDF31CFFA22200A6F8BF /* AvatarViewTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7955E431F0D8CF600B8E7ED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +467,57 @@
 			};
 			name = Release;
 		};
+		E7955E4D1F0D8CF700B8E7ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = M9Y5WF87VL;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = AvatarView/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "design.bsn.AvatarView-watchOS";
+				PRODUCT_NAME = AvatarView;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = Debug;
+		};
+		E7955E4E1F0D8CF700B8E7ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = M9Y5WF87VL;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = AvatarView/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "design.bsn.AvatarView-watchOS";
+				PRODUCT_NAME = AvatarView;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 3.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -442,6 +547,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		E7955E4F1F0D8CF700B8E7ED /* Build configuration list for PBXNativeTarget "AvatarView-watchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7955E4D1F0D8CF700B8E7ED /* Debug */,
+				E7955E4E1F0D8CF700B8E7ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
