@@ -8,12 +8,6 @@
 import UIKit
 import Kingfisher
 
-public protocol AvatarPresentable {
-    var initialsString: String? { get }
-    var image: UIImage? { get }
-    var imageURL: URL? { get }
-}
-
 @IBDesignable open class AvatarView: UIView {
     
     // MARK: - Inspectable properties
