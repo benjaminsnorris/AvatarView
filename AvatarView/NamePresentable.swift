@@ -8,6 +8,13 @@
 import Foundation
 import Contacts
 
+public protocol AvatarPresentable {
+    var initialsString: String? { get }
+    var image: UIImage? { get }
+    var imageURL: URL? { get }
+}
+
+
 public protocol NamePresentable {
     var givenName: String? { get }
     var familyName: String? { get }
