@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		361DC1A31F34AC690075A51A /* AvatarLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361DC1A21F34AC680075A51A /* AvatarLineView.swift */; };
 		705E42811E048C2100CA7C50 /* ContactPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 705E42801E048C2100CA7C50 /* ContactPicker.swift */; };
 		705E7D2D1DE4A1C1002AB0FF /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 705E7D2C1DE4A1C1002AB0FF /* Kingfisher.framework */; };
 		70613EDA1DECD8A30023E0C7 /* AvatarImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70613ED91DECD8A30023E0C7 /* AvatarImageService.swift */; };
@@ -32,6 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		361DC1A21F34AC680075A51A /* AvatarLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarLineView.swift; sourceTree = "<group>"; };
 		705E42801E048C2100CA7C50 /* ContactPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactPicker.swift; sourceTree = "<group>"; };
 		705E7D2C1DE4A1C1002AB0FF /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Kingfisher.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70613ED91DECD8A30023E0C7 /* AvatarImageService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarImageService.swift; sourceTree = "<group>"; };
@@ -106,14 +108,16 @@
 		70F4CDE51CFFA22200A6F8BF /* AvatarView */ = {
 			isa = PBXGroup;
 			children = (
+				70B7E0EF1D8AD1800010220B /* AvatarHeader.swift */,
+				70613ED91DECD8A30023E0C7 /* AvatarImageService.swift */,
+				361DC1A21F34AC680075A51A /* AvatarLineView.swift */,
 				70F4CDE61CFFA22200A6F8BF /* AvatarView.h */,
 				A15D5DAE1EE0B04200C8F309 /* DoubleAvatarView.swift */,
 				70F4CDFD1CFFA27400A6F8BF /* AvatarView.swift */,
-				70B7E0EF1D8AD1800010220B /* AvatarHeader.swift */,
-				7096370C1D00A939006884B8 /* NamePresentable.swift */,
-				70613ED91DECD8A30023E0C7 /* AvatarImageService.swift */,
 				705E42801E048C2100CA7C50 /* ContactPicker.swift */,
+				A15D5DAE1EE0B04200C8F309 /* DoubleAvatarView.swift */,
 				70F4CDE81CFFA22200A6F8BF /* Info.plist */,
+				7096370C1D00A939006884B8 /* NamePresentable.swift */,
 			);
 			path = AvatarView;
 			sourceTree = "<group>";
@@ -281,6 +285,7 @@
 				7096370D1D00A939006884B8 /* NamePresentable.swift in Sources */,
 				70B7E0F01D8AD1800010220B /* AvatarHeader.swift in Sources */,
 				70613EDA1DECD8A30023E0C7 /* AvatarImageService.swift in Sources */,
+				361DC1A31F34AC690075A51A /* AvatarLineView.swift in Sources */,
 				70F4CDFE1CFFA27400A6F8BF /* AvatarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
