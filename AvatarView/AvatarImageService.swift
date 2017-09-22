@@ -19,15 +19,17 @@ open class AvatarImageService: NSObject {
     
     let viewController: UIViewController
     let delegate: AvatarImageServiceDelegate
+    let cameraDevice: UIImagePickerControllerCameraDevice
     static var statusBarStyle = UIStatusBarStyle.default
     var contactPicker: ContactPicker!
     
     
     // MARK: - Initializers
     
-    required public init(viewController: UIViewController, delegate: AvatarImageServiceDelegate) {
+    required public init(viewController: UIViewController, delegate: AvatarImageServiceDelegate, cameraDevice: UIImagePickerControllerCameraDevice = .front) {
         self.viewController = viewController
         self.delegate = delegate
+        self.cameraDevice = cameraDevice
         super.init()
         contactPicker = ContactPicker(viewController: self.viewController, delegate: self, photoRequired: true)
     }
@@ -134,7 +136,7 @@ private extension AvatarImageService {
             }
         } else {
             imagePicker.sourceType = .camera
-            imagePicker.cameraDevice = .front
+            imagePicker.cameraDevice = cameraDevice
             imagePicker.modalPresentationStyle = .fullScreen
         }
         
