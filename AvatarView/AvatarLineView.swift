@@ -53,7 +53,7 @@ import UIKit
         }
     }
     
-    @IBInspectable open var maxCircles = 3 {
+    @IBInspectable open var maxCircles: Int = 3 {
         didSet {
             layoutIfNeeded()
         }
@@ -132,19 +132,37 @@ private extension AvatarLineView {
         stackView.arrangedSubviews.forEach { stackView.removeArrangedSubview($0) }
         stackView.subviews.forEach { $0.removeFromSuperview() }
         
-        // TODO: if avatars.count > maxCircles { add avatar view for +#
-        for avatar in avatars {
-            let avatarView = AvatarView()
-            setUpAvatarView(avatarView)
-            avatarView.update(with: avatar)
-            
-            let borderView = UIView()
-            self.borderViews.append(borderView)
-            setUpBorderView(borderView)
-            addAvatarView(avatarView, to: borderView)
-            stackView.addArrangedSubview(borderView)
-            self.avatarViews.append(avatarView)
+        if avatars.isEmpty {
+            addAvatar(for: nil)
+        } else {
+            for (index, avatar) in avatars.enumerated() {
+                if avatars.count > maxCircles && index >= maxCircles - 1 {
+                    let remaining = maxCircles - 2 // 1 for 0-based index, 2 for extra avatar to show remaining count
+                    addAvatar(for: nil, text: "+\(remaining)")
+                    break
+                } else {
+                    addAvatar(for: avatar)
+                }
+            }
         }
+    }
+    
+    func addAvatar(for person: AvatarPresentable?, text: String? = nil) {
+        let avatarView = AvatarView()
+        setUpAvatarView(avatarView)
+        if let person = person {
+            avatarView.update(with: person)
+        } else {
+            avatarView.reset()
+            avatarView.initials = text
+        }
+        
+        let borderView = UIView()
+        self.borderViews.append(borderView)
+        setUpBorderView(borderView)
+        addAvatarView(avatarView, to: borderView)
+        stackView.addArrangedSubview(borderView)
+        self.avatarViews.append(avatarView)
     }
     
     func updateAllConstraints() {
