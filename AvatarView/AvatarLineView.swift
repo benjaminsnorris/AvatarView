@@ -29,7 +29,7 @@ import UIKit
         }
     }
     
-    @IBInspectable open var borderWidth: CGFloat = 0.0 {
+    @IBInspectable open var avatarBorderWidth: CGFloat = 0.0 {
         didSet {
             updateBorders()
         }
@@ -72,7 +72,6 @@ import UIKit
     fileprivate var borderViews = [UIView]()
     fileprivate var plusAvatar = AvatarView()
     fileprivate let stackView = UIStackView()
-    fileprivate let padding: CGFloat = 2
     
 
     // MARK: - Initialization
@@ -175,37 +174,40 @@ private extension AvatarLineView {
     func setUpBorderView(_ borderView: UIView) {
         borderView.clipsToBounds = true
         borderView.translatesAutoresizingMaskIntoConstraints = false
-        borderView.backgroundColor = .white
+        borderView.backgroundColor = borderColor
         borderView.addConstraint(borderView.widthAnchor.constraint(equalTo: borderView.heightAnchor))
     }
     
     func setUpAvatarView(_ avatarView: AvatarView) {
         avatarView.translatesAutoresizingMaskIntoConstraints = false
         avatarView.addConstraint(avatarView.widthAnchor.constraint(equalTo: avatarView.heightAnchor))
-        avatarView.borderColor =  borderColor
+        avatarView.borderColor = borderColor
         avatarView.innerColor = innerColor
         avatarView.textColor = textColor
-        avatarView.borderWidth = borderWidth
+        avatarView.borderWidth = avatarBorderWidth
         avatarView.fontName = fontName
         avatarView.fontSize = fontSize
     }
     
     func addAvatarView(_ avatarView: AvatarView, to borderView: UIView) {
         borderView.addSubview(avatarView)
-        borderView.addConstraint(avatarView.leadingAnchor.constraint(equalTo: borderView.leadingAnchor, constant: padding))
-        borderView.addConstraint(avatarView.topAnchor.constraint(equalTo: borderView.topAnchor, constant: padding))
-        borderView.addConstraint(borderView.trailingAnchor.constraint(equalTo: avatarView.trailingAnchor, constant: padding))
-        borderView.addConstraint(borderView.bottomAnchor.constraint(equalTo: avatarView.bottomAnchor, constant: padding))
+        borderView.addConstraint(avatarView.leadingAnchor.constraint(equalTo: borderView.leadingAnchor))
+        borderView.addConstraint(avatarView.topAnchor.constraint(equalTo: borderView.topAnchor))
+        borderView.addConstraint(borderView.trailingAnchor.constraint(equalTo: avatarView.trailingAnchor))
+        borderView.addConstraint(borderView.bottomAnchor.constraint(equalTo: avatarView.bottomAnchor))
     }
     
     func updateBorders() {
-        avatarViews.forEach { $0.layer.borderWidth = borderWidth }
+        avatarViews.forEach { $0.layer.borderWidth = avatarBorderWidth }
     }
     
     func updateColors() {
         avatarViews.forEach { avatarView in
             avatarView.borderColor = borderColor
             avatarView.textColor = textColor
+        }
+        borderViews.forEach { borderView in
+            borderView.backgroundColor = borderColor
         }
     }
     
