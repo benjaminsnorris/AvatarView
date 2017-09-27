@@ -136,7 +136,7 @@ private extension AvatarLineView {
         } else {
             for (index, avatar) in avatars.enumerated() {
                 if avatars.count > maxCircles && index >= maxCircles - 1 {
-                    let remaining = maxCircles - 2 // 1 for 0-based index, 2 for extra avatar to show remaining count
+                    let remaining = avatars.count - index
                     addAvatar(for: nil, text: "+\(remaining)")
                     break
                 } else {
