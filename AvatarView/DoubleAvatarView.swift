@@ -83,6 +83,9 @@ import UIKit
         }
     }
     
+    
+    // MARK: - Private properties
+    
     fileprivate var primaryAvatarView = AvatarView()
     fileprivate var secondaryAvatarView = AvatarView()
     fileprivate var secondaryHeightConstraint: NSLayoutConstraint?
@@ -115,13 +118,18 @@ import UIKit
 
 
 
-//MARK: - Public
+// MARK: - Public
 
 extension DoubleAvatarView {
     
     open func update(with primary: AvatarPresentable, secondary: AvatarPresentable) {
         primaryAvatarView.update(with: primary)
         secondaryAvatarView.update(with: secondary)
+    }
+    
+    open func reset() {
+        primaryAvatarView.reset()
+        secondaryAvatarView.reset()
     }
     
 }
