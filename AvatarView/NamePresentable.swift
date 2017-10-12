@@ -20,7 +20,6 @@ public protocol NamePresentable {
     var familyName: String? { get }
 }
 
-
 public extension NamePresentable {
     
     public var name: String {
@@ -43,7 +42,7 @@ public extension NamePresentable {
         return fullName
     }
     
-    public var initials: String {
+    public var initials: String? {
         var initialsString = String()
         if let givenName = givenName , givenName.characters.count > 0 {
             initialsString += givenName.substring(to: givenName.characters.index(after: givenName.startIndex))
@@ -52,7 +51,7 @@ public extension NamePresentable {
             initialsString += familyName.substring(to: familyName.characters.index(after: familyName.startIndex))
         }
         if initialsString.characters.count == 0 {
-            initialsString = "?"
+            return nil
         }
         return initialsString.uppercased()
     }
