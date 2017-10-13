@@ -29,7 +29,7 @@ import UIKit
         }
     }
     
-    @IBInspectable open var separationColor: UIColor = UIColor.white {
+    @IBInspectable open var spacingColor: UIColor = UIColor.white {
         didSet {
             updateColors()
         }
@@ -85,7 +85,7 @@ import UIKit
     
     @IBInspectable open var secondarySpacing: CGFloat = 2.0 {
         didSet {
-            updateAllConstraints()
+            updateMargins()
         }
     }
     
@@ -100,7 +100,6 @@ import UIKit
     
     fileprivate var primaryAvatarView = AvatarView()
     fileprivate var secondaryAvatarView = AvatarView()
-    fileprivate var secondaryBorderView = UIView()
     
     fileprivate var secondaryHeightConstraint: NSLayoutConstraint?
     fileprivate var secondaryLeadingConstraint: NSLayoutConstraint!
@@ -110,10 +109,6 @@ import UIKit
     fileprivate var secondaryInnerLeadingConstraint: NSLayoutConstraint!
     fileprivate var secondaryInnerTrailingConstraint: NSLayoutConstraint!
     fileprivate var secondaryTopConstraint: NSLayoutConstraint!
-    fileprivate var secondaryBorderLeadingConstraint: NSLayoutConstraint!
-    fileprivate var secondaryBorderTrailingConstraint: NSLayoutConstraint!
-    fileprivate var secondaryBorderTopConstraint: NSLayoutConstraint!
-    fileprivate var secondaryBorderBottomConstraint: NSLayoutConstraint!
 
     
     // MARK: - Initialization
@@ -126,16 +121,6 @@ import UIKit
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setUpViews()
-    }
-
-    
-    // MARK: - Lifecycle overrides
-    
-    override open func layoutSubviews() {
-        super.layoutSubviews()
-        
-        let minSideSize = min(secondaryBorderView.frame.size.width, secondaryBorderView.frame.size.height)
-        secondaryBorderView.layer.cornerRadius = minSideSize / 2.0
     }
     
 }
@@ -166,18 +151,17 @@ private extension DoubleAvatarView {
         clipsToBounds = true
         translatesAutoresizingMaskIntoConstraints = false
         primaryAvatarView.translatesAutoresizingMaskIntoConstraints = false
-        secondaryBorderView.translatesAutoresizingMaskIntoConstraints = false
         secondaryAvatarView.translatesAutoresizingMaskIntoConstraints = false
-        secondaryBorderView.clipsToBounds = true
-        secondaryBorderView.backgroundColor = .white
-        
-        secondaryBorderView.layer.cornerRadius = secondaryBorderView.bounds.size.height / 2
         
         addSubview(primaryAvatarView)
-        secondaryBorderView.addSubview(secondaryAvatarView)
-        addSubview(secondaryBorderView)
+        addSubview(secondaryAvatarView)
         setupConstraints()
+        
         updateAllConstraints()
+        updateColors()
+        updateBorders()
+        updateMargins()
+        updateInitials()
     }
     
     func primaryAvatarWidth(fromSuperFrame frame: CGRect) -> CGFloat {
@@ -190,21 +174,9 @@ private extension DoubleAvatarView {
         addConstraint(primaryAvatarView.heightAnchor.constraint(equalTo: primaryAvatarView.widthAnchor))
         addConstraint(primaryAvatarView.widthAnchor.constraint(equalToConstant: primaryAvatarWidth(fromSuperFrame: frame)))
         
-        addConstraint(secondaryBorderView.heightAnchor.constraint(equalTo: secondaryBorderView.widthAnchor))
-        secondaryHeightConstraint = secondaryBorderView.heightAnchor.constraint(equalTo: primaryAvatarView.heightAnchor, multiplier: secondarySizePercentage)
+        addConstraint(secondaryAvatarView.heightAnchor.constraint(equalTo: secondaryAvatarView.widthAnchor))
+        secondaryHeightConstraint = secondaryAvatarView.heightAnchor.constraint(equalTo: primaryAvatarView.heightAnchor, multiplier: secondarySizePercentage)
         addConstraint(secondaryHeightConstraint!)
-        
-        // SecondaryAvatar <-> Superview (SecondaryBorder)
-        secondaryBorderLeadingConstraint = secondaryAvatarView.leadingAnchor.constraint(equalTo: secondaryBorderView.leadingAnchor)
-        addConstraint(secondaryBorderLeadingConstraint)
-        secondaryBorderTopConstraint = secondaryAvatarView.topAnchor.constraint(equalTo: secondaryBorderView.topAnchor)
-        addConstraint(secondaryBorderTopConstraint)
-        secondaryBorderTrailingConstraint = secondaryAvatarView.trailingAnchor.constraint(equalTo: secondaryBorderView.trailingAnchor)
-        addConstraint(secondaryBorderTrailingConstraint)
-        secondaryBorderBottomConstraint = secondaryAvatarView.bottomAnchor.constraint(equalTo: secondaryBorderView.bottomAnchor)
-        addConstraint(secondaryBorderBottomConstraint)
-        secondaryLeadingConstraint = leadingAnchor.constraint(equalTo: secondaryBorderView.leadingAnchor)
-        secondaryTrailingConstraint = trailingAnchor.constraint(equalTo: secondaryBorderView.trailingAnchor)
         
         // Primary <-> superview
         addConstraint(topAnchor.constraint(equalTo: primaryAvatarView.topAnchor))
@@ -212,10 +184,12 @@ private extension DoubleAvatarView {
         primaryTrailingConstraint = trailingAnchor.constraint(equalTo: primaryAvatarView.trailingAnchor)
         
         // Secondary <-> Primary
-        secondaryTopConstraint = primaryAvatarView.bottomAnchor.constraint(equalTo: secondaryBorderView.topAnchor)
+        secondaryTopConstraint = primaryAvatarView.bottomAnchor.constraint(equalTo: secondaryAvatarView.topAnchor)
         addConstraint(secondaryTopConstraint)
-        secondaryInnerLeadingConstraint = secondaryBorderView.leadingAnchor.constraint(equalTo: primaryAvatarView.trailingAnchor)
-        secondaryInnerTrailingConstraint = secondaryBorderView.trailingAnchor.constraint(equalTo: primaryAvatarView.leadingAnchor)
+        secondaryLeadingConstraint = leadingAnchor.constraint(equalTo: secondaryAvatarView.leadingAnchor)
+        secondaryTrailingConstraint = trailingAnchor.constraint(equalTo: secondaryAvatarView.trailingAnchor)
+        secondaryInnerLeadingConstraint = secondaryAvatarView.leadingAnchor.constraint(equalTo: primaryAvatarView.trailingAnchor)
+        secondaryInnerTrailingConstraint = secondaryAvatarView.trailingAnchor.constraint(equalTo: primaryAvatarView.leadingAnchor)
     }
     
     func updateAllConstraints() {
@@ -226,11 +200,6 @@ private extension DoubleAvatarView {
         secondaryInnerLeadingConstraint.isActive = isOnRight
         secondaryInnerTrailingConstraint.isActive = !isOnRight
         
-        secondaryBorderLeadingConstraint.constant = secondarySpacing
-        secondaryBorderTopConstraint.constant = secondarySpacing
-        secondaryBorderTrailingConstraint.constant = -secondarySpacing
-        secondaryBorderBottomConstraint.constant = -secondarySpacing
-
         secondaryTopConstraint.constant = secondaryOverlap * 0.75 // So secondary is a little more towards the center
         secondaryInnerLeadingConstraint.constant = secondaryOverlap
         secondaryInnerTrailingConstraint.constant = secondaryOverlap
@@ -247,8 +216,8 @@ private extension DoubleAvatarView {
             avatarView.borderColor = borderColor
             avatarView.innerColor = innerColor
             avatarView.textColor = textColor
+            avatarView.spacingColor = spacingColor
         }
-        secondaryBorderView.backgroundColor = separationColor
     }
     
     func updateBorders() {
@@ -259,6 +228,7 @@ private extension DoubleAvatarView {
     func updateMargins() {
         primaryAvatarView.innerMargin = innerMargin
         secondaryAvatarView.innerMargin = innerMargin
+        secondaryAvatarView.outerMargin = secondarySpacing
     }
     
     func updateInitials() {

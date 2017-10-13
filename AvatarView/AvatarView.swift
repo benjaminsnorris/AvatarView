@@ -24,6 +24,12 @@ import Kingfisher
         }
     }
     
+    @IBInspectable open var spacingColor: UIColor = UIColor.white {
+        didSet {
+            updateColors()
+        }
+    }
+    
     @IBInspectable open var textColor: UIColor = UIColor(red: 29 / 255.0, green: 30 / 255.0, blue: 29 / 255.0, alpha: 1.0) {
         didSet {
             updateColors()
@@ -39,6 +45,12 @@ import Kingfisher
     @IBInspectable open var innerMargin: CGFloat = 2.0 {
         didSet {
             updateInnerMargin()
+        }
+    }
+    
+    @IBInspectable open var outerMargin: CGFloat = 0.0 {
+        didSet {
+            updateOuterMargin()
         }
     }
     
@@ -85,10 +97,15 @@ import Kingfisher
     
     // MARK: - Private properties
     
+    fileprivate let spacingView = UIView()
     fileprivate let backgroundView = UIView()
     fileprivate let initialsLabel = UILabel()
     fileprivate var initialsLeadingConstraint: NSLayoutConstraint!
     fileprivate var initialsTrailingConstraint: NSLayoutConstraint!
+    fileprivate var spacingLeadingConstraint: NSLayoutConstraint!
+    fileprivate var spacingTrailingConstraint: NSLayoutConstraint!
+    fileprivate var spacingTopConstraint: NSLayoutConstraint!
+    fileprivate var spacingBottomConstraint: NSLayoutConstraint!
 
     
     // MARK: - Initialization
@@ -111,6 +128,7 @@ import Kingfisher
         
         let minSideSize = min(frame.size.width, frame.size.height)
         layer.cornerRadius = minSideSize / 2.0
+        backgroundView.layer.cornerRadius = (minSideSize - outerMargin * 2.0) / 2.0
         
         if automaticSize {
             fontSize = minSideSize / 2.5
@@ -160,25 +178,43 @@ private extension AvatarView {
         updateBorder()
         
         clipsToBounds = true
+        backgroundView.clipsToBounds = true
         
-        setupFullSize(backgroundView)
+        setupFullSize(spacingView)
+
+        backgroundView.translatesAutoresizingMaskIntoConstraints = false
+        spacingView.addSubview(backgroundView)
+        spacingLeadingConstraint = backgroundView.leadingAnchor.constraint(equalTo: spacingView.leadingAnchor)
+        spacingLeadingConstraint.isActive = true
+        spacingTopConstraint = backgroundView.topAnchor.constraint(equalTo: spacingView.topAnchor)
+        spacingTopConstraint.isActive = true
+        spacingTrailingConstraint = spacingView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor)
+        spacingTrailingConstraint.isActive = true
+        spacingBottomConstraint = spacingView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor)
+        spacingBottomConstraint.isActive = true
+        updateOuterMargin()
 
         initialsLabel.translatesAutoresizingMaskIntoConstraints = false
         initialsLabel.textAlignment = .center
-        addSubview(initialsLabel)
+        backgroundView.addSubview(initialsLabel)
         initialsLabel.isAccessibilityElement = false
         
-        initialsLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        initialsLeadingConstraint = initialsLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: innerMargin)
+        initialsLabel.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor).isActive = true
+        initialsLeadingConstraint = initialsLabel.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: innerMargin)
         initialsLeadingConstraint.priority = 999
         initialsLeadingConstraint.isActive = true
-        initialsTrailingConstraint = trailingAnchor.constraint(equalTo: initialsLabel.trailingAnchor, constant: innerMargin)
+        initialsTrailingConstraint = backgroundView.trailingAnchor.constraint(equalTo: initialsLabel.trailingAnchor, constant: innerMargin)
         initialsTrailingConstraint.priority = 999
         initialsTrailingConstraint.isActive = true
         
         // Add image as an overlay to hide initials once it's been added
         imageView.contentMode = .scaleAspectFill
-        setupFullSize(imageView)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        backgroundView.addSubview(imageView)
+        imageView.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor).isActive = true
+        imageView.topAnchor.constraint(equalTo: backgroundView.topAnchor).isActive = true
+        imageView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor).isActive = true
+        imageView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor).isActive = true
         imageView.isAccessibilityElement = false
     }
     
@@ -192,6 +228,7 @@ private extension AvatarView {
     }
     
     func updateColors() {
+        spacingView.backgroundColor = spacingColor
         backgroundView.backgroundColor = innerColor
         layer.borderColor = borderColor.cgColor
         initialsLabel.textColor = textColor
@@ -219,6 +256,13 @@ private extension AvatarView {
     func updateInnerMargin() {
         initialsLeadingConstraint.constant = innerMargin
         initialsTrailingConstraint.constant = innerMargin
+    }
+    
+    func updateOuterMargin() {
+        spacingLeadingConstraint.constant = outerMargin
+        spacingTopConstraint.constant = outerMargin
+        spacingTrailingConstraint.constant = outerMargin
+        spacingBottomConstraint.constant = outerMargin
     }
     
     func drawAsImage() -> UIImage {
