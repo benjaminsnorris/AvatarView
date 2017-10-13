@@ -29,6 +29,12 @@ import UIKit
         }
     }
     
+    @IBInspectable open var spacingColor: UIColor = UIColor.white {
+        didSet {
+            updateColors()
+        }
+    }
+    
     @IBInspectable open var avatarBorderWidth: CGFloat = 0.0 {
         didSet {
             updateBorders()
@@ -49,7 +55,13 @@ import UIKit
     
     @IBInspectable open var overlap: CGFloat = 10 {
         didSet {
-            updateAllConstraints()
+            stackView.spacing = -overlap
+        }
+    }
+    
+    @IBInspectable open var spacing: CGFloat = 2.0 {
+        didSet {
+            updateMargins()
         }
     }
     
@@ -69,7 +81,6 @@ import UIKit
     
     fileprivate var avatars = [AvatarPresentable]()
     fileprivate var avatarViews = [AvatarView]()
-    fileprivate var borderViews = [UIView]()
     fileprivate var plusAvatar = AvatarView()
     fileprivate let stackView = UIStackView()
     
@@ -85,17 +96,6 @@ import UIKit
         super.init(coder: aDecoder)
         setUpViews()
     }
-
-    
-    // MARK: - Lifecycle overrides
-    
-    override open func layoutSubviews() {
-        super.layoutSubviews()
-        
-        borderViews.forEach { borderView in
-            borderView.layer.cornerRadius = stackView.frame.size.height / 2
-        }
-    }
     
 }
 
@@ -107,7 +107,7 @@ extension AvatarLineView {
     
     open func update(with avatars: [AvatarPresentable]) {
         self.avatars = avatars
-        setUpViews()
+        updateAvatars()
     }
     
 }
@@ -126,10 +126,13 @@ private extension AvatarLineView {
         stackView.spacing = -overlap
         addSubview(stackView)
         updateAllConstraints()
-        
-        self.avatarViews.removeAll()
-        stackView.arrangedSubviews.forEach { stackView.removeArrangedSubview($0) }
-        stackView.subviews.forEach { $0.removeFromSuperview() }
+        updateMargins()
+        updateAvatars()
+    }
+    
+    func updateAvatars() {
+        avatarViews.forEach { $0.removeFromSuperview() }
+        avatarViews.removeAll()
         
         if avatars.isEmpty {
             addAvatar(for: nil)
@@ -155,12 +158,7 @@ private extension AvatarLineView {
             avatarView.reset()
             avatarView.initials = text
         }
-        
-        let borderView = UIView()
-        self.borderViews.append(borderView)
-        setUpBorderView(borderView)
-        addAvatarView(avatarView, to: borderView)
-        stackView.addArrangedSubview(borderView)
+        stackView.addArrangedSubview(avatarView)
         self.avatarViews.append(avatarView)
     }
     
@@ -171,30 +169,16 @@ private extension AvatarLineView {
         addConstraint(trailingAnchor.constraint(equalTo: stackView.trailingAnchor))
     }
     
-    func setUpBorderView(_ borderView: UIView) {
-        borderView.clipsToBounds = true
-        borderView.translatesAutoresizingMaskIntoConstraints = false
-        borderView.backgroundColor = borderColor
-        borderView.addConstraint(borderView.widthAnchor.constraint(equalTo: borderView.heightAnchor))
-    }
-    
     func setUpAvatarView(_ avatarView: AvatarView) {
-        avatarView.translatesAutoresizingMaskIntoConstraints = false
         avatarView.addConstraint(avatarView.widthAnchor.constraint(equalTo: avatarView.heightAnchor))
         avatarView.borderColor = borderColor
         avatarView.innerColor = innerColor
         avatarView.textColor = textColor
+        avatarView.spacingColor = spacingColor
         avatarView.borderWidth = avatarBorderWidth
         avatarView.fontName = fontName
         avatarView.fontSize = fontSize
-    }
-    
-    func addAvatarView(_ avatarView: AvatarView, to borderView: UIView) {
-        borderView.addSubview(avatarView)
-        borderView.addConstraint(avatarView.leadingAnchor.constraint(equalTo: borderView.leadingAnchor))
-        borderView.addConstraint(avatarView.topAnchor.constraint(equalTo: borderView.topAnchor))
-        borderView.addConstraint(borderView.trailingAnchor.constraint(equalTo: avatarView.trailingAnchor))
-        borderView.addConstraint(borderView.bottomAnchor.constraint(equalTo: avatarView.bottomAnchor))
+        avatarView.outerMargin = spacing
     }
     
     func updateBorders() {
@@ -205,10 +189,12 @@ private extension AvatarLineView {
         avatarViews.forEach { avatarView in
             avatarView.borderColor = borderColor
             avatarView.textColor = textColor
+            avatarView.spacingColor = spacingColor
         }
-        borderViews.forEach { borderView in
-            borderView.backgroundColor = borderColor
-        }
+    }
+    
+    func updateMargins() {
+        avatarViews.forEach { $0.outerMargin = spacing }
     }
     
 }
