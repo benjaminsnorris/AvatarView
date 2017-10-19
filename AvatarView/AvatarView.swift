@@ -147,7 +147,13 @@ import Kingfisher
         initials = nil
     }
     
-    open func update(with presenter: AvatarPresentable) {
+    open func update(with presenter: AvatarPresentable?) {
+        guard let presenter = presenter else {
+            initials = nil
+            image = nil
+            return
+        }
+        
         if let initialsString = presenter.initialsString, !initialsString.characters.isEmpty {
             if CharacterSet.letters.isSuperset(of: CharacterSet(charactersIn: initialsString)) {
                 initials = initialsString
