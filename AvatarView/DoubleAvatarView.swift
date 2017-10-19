@@ -106,6 +106,7 @@ import UIKit
     fileprivate var secondaryTrailingConstraint: NSLayoutConstraint!
     fileprivate var primaryLeadingConstraint: NSLayoutConstraint!
     fileprivate var primaryTrailingConstraint: NSLayoutConstraint!
+    fileprivate var primaryCenteredConstraint: NSLayoutConstraint!
     fileprivate var secondaryInnerLeadingConstraint: NSLayoutConstraint!
     fileprivate var secondaryInnerTrailingConstraint: NSLayoutConstraint!
     fileprivate var secondaryTopConstraint: NSLayoutConstraint!
@@ -131,9 +132,31 @@ import UIKit
 
 extension DoubleAvatarView {
     
-    open func update(with primary: AvatarPresentable, secondary: AvatarPresentable) {
-        primaryAvatarView.update(with: primary)
-        secondaryAvatarView.update(with: secondary)
+    open func update(with primary: AvatarPresentable?, secondary: AvatarPresentable?) {
+        var hasBoth = true
+        if let second = secondary, primary == nil {
+            primaryAvatarView.update(with: second)
+            hasBoth = false
+        } else {
+            primaryAvatarView.update(with: primary)
+            secondaryAvatarView.update(with: secondary)
+            if primary == nil || secondary == nil {
+                hasBoth = false
+            }
+        }
+        if !hasBoth {
+            secondaryAvatarView.isHidden = true
+            primaryCenteredConstraint.isActive = true
+            primaryLeadingConstraint.isActive = true
+            primaryTrailingConstraint.isActive = true
+            secondaryHeightConstraint?.isActive = false
+        } else {
+            primaryCenteredConstraint.isActive = false
+            primaryLeadingConstraint.isActive = isOnRight
+            primaryTrailingConstraint.isActive = !isOnRight
+            secondaryHeightConstraint?.isActive = true
+        }
+        
     }
     
     open func reset() {
@@ -172,16 +195,21 @@ private extension DoubleAvatarView {
     func setupConstraints() {
         // Aspect ratio
         addConstraint(primaryAvatarView.heightAnchor.constraint(equalTo: primaryAvatarView.widthAnchor))
-        addConstraint(primaryAvatarView.widthAnchor.constraint(equalToConstant: primaryAvatarWidth(fromSuperFrame: frame)))
+        let primaryWidthConstraint = primaryAvatarView.widthAnchor.constraint(equalToConstant: primaryAvatarWidth(fromSuperFrame: frame))
+        primaryWidthConstraint.isActive = true
+        primaryWidthConstraint.priority = 999
         
         addConstraint(secondaryAvatarView.heightAnchor.constraint(equalTo: secondaryAvatarView.widthAnchor))
         secondaryHeightConstraint = secondaryAvatarView.heightAnchor.constraint(equalTo: primaryAvatarView.heightAnchor, multiplier: secondarySizePercentage)
         addConstraint(secondaryHeightConstraint!)
         
         // Primary <-> superview
-        addConstraint(topAnchor.constraint(equalTo: primaryAvatarView.topAnchor))
+        let primaryTopConstraint = topAnchor.constraint(equalTo: primaryAvatarView.topAnchor)
+        primaryTopConstraint.priority = 999
+        primaryTopConstraint.isActive = true
         primaryLeadingConstraint = leadingAnchor.constraint(equalTo: primaryAvatarView.leadingAnchor)
         primaryTrailingConstraint = trailingAnchor.constraint(equalTo: primaryAvatarView.trailingAnchor)
+        primaryCenteredConstraint = centerYAnchor.constraint(equalTo: primaryAvatarView.centerYAnchor)
         
         // Secondary <-> Primary
         secondaryTopConstraint = primaryAvatarView.bottomAnchor.constraint(equalTo: secondaryAvatarView.topAnchor)
@@ -189,7 +217,9 @@ private extension DoubleAvatarView {
         secondaryLeadingConstraint = leadingAnchor.constraint(equalTo: secondaryAvatarView.leadingAnchor)
         secondaryTrailingConstraint = trailingAnchor.constraint(equalTo: secondaryAvatarView.trailingAnchor)
         secondaryInnerLeadingConstraint = secondaryAvatarView.leadingAnchor.constraint(equalTo: primaryAvatarView.trailingAnchor)
+        secondaryInnerLeadingConstraint.priority = 999
         secondaryInnerTrailingConstraint = secondaryAvatarView.trailingAnchor.constraint(equalTo: primaryAvatarView.leadingAnchor)
+        secondaryInnerTrailingConstraint.priority = 999
     }
     
     func updateAllConstraints() {
