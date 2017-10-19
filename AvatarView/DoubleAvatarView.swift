@@ -231,7 +231,7 @@ private extension DoubleAvatarView {
         secondaryInnerTrailingConstraint.isActive = !isOnRight
         
         secondaryTopConstraint.constant = secondaryOverlap * 0.75 // So secondary is a little more towards the center
-        secondaryInnerLeadingConstraint.constant = secondaryOverlap
+        secondaryInnerLeadingConstraint.constant = -secondaryOverlap
         secondaryInnerTrailingConstraint.constant = secondaryOverlap
     }
     
