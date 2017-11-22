@@ -222,6 +222,9 @@ private extension AvatarView {
         imageView.trailingAnchor.constraint(equalTo: backgroundView.trailingAnchor).isActive = true
         imageView.bottomAnchor.constraint(equalTo: backgroundView.bottomAnchor).isActive = true
         imageView.isAccessibilityElement = false
+        if #available(iOSApplicationExtension 11.0, *) {
+            imageView.accessibilityIgnoresInvertColors = true
+        }
     }
     
     func setupFullSize(_ view: UIView) {
