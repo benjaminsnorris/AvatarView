@@ -11,7 +11,7 @@ import UIKit
     
     // MARK: - Inspectable properties
     
-    @IBInspectable open var borderColor: UIColor = UIColor(red: 29 / 255.0, green: 30 / 255.0, blue: 29 / 255.0, alpha: 1.0) {
+    @IBInspectable open var avatarBorderColor: UIColor = UIColor(red: 29 / 255.0, green: 30 / 255.0, blue: 29 / 255.0, alpha: 1.0) {
         didSet {
             updateColors()
         }
@@ -171,7 +171,7 @@ private extension AvatarLineView {
     
     func setUpAvatarView(_ avatarView: AvatarView) {
         avatarView.addConstraint(avatarView.widthAnchor.constraint(equalTo: avatarView.heightAnchor))
-        avatarView.borderColor = borderColor
+        avatarView.borderColor = avatarBorderColor
         avatarView.innerColor = innerColor
         avatarView.textColor = textColor
         avatarView.spacingColor = spacingColor
@@ -187,7 +187,7 @@ private extension AvatarLineView {
     
     func updateColors() {
         avatarViews.forEach { avatarView in
-            avatarView.borderColor = borderColor
+            avatarView.borderColor = avatarBorderColor
             avatarView.textColor = textColor
             avatarView.spacingColor = spacingColor
         }
