@@ -18,8 +18,8 @@ open class AvatarImageService: NSObject {
     
     // MARK: - Internal properties
     
-    let viewController: UIViewController
-    let delegate: AvatarImageServiceDelegate
+    weak var viewController: UIViewController?
+    weak var delegate: AvatarImageServiceDelegate?
     let cameraDevice: UIImagePickerControllerCameraDevice
     static var statusBarStyle = UIStatusBarStyle.default
     var contactPicker: ContactPicker!
@@ -70,7 +70,7 @@ open class AvatarImageService: NSObject {
         }))
         if existingPhoto {
             actionSheet.addAction(UIAlertAction(title: NSLocalizedString("Remove photo", comment: "Action title to remove photo"), style: .destructive) { _ in
-                self.delegate.updateImage(with: nil)
+                self.delegate?.updateImage(with: nil)
             })
         }
         actionSheet.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel button title"), style: .cancel, handler: nil))
@@ -80,7 +80,7 @@ open class AvatarImageService: NSObject {
             actionSheet.popoverPresentationController?.sourceView = view.superview
             actionSheet.popoverPresentationController?.sourceRect = view.frame
         }
-        viewController.present(actionSheet, animated: true, completion: nil)
+        viewController?.present(actionSheet, animated: true, completion: nil)
     }
     
 }
@@ -96,7 +96,7 @@ extension AvatarImageService: UIImagePickerControllerDelegate, UINavigationContr
             UIImageWriteToSavedPhotosAlbum(originalImage, nil, nil, nil)
         }
         guard let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage else { return }
-        delegate.updateImage(with: editedImage)
+        delegate?.updateImage(with: editedImage)
     }
     
 }
@@ -111,7 +111,7 @@ extension AvatarImageService: ContactPickerDelegate {
     }
     
     public func contactSelected(_ contact: CNContact, firstName: String?, lastName: String?, photoData: Data?, thumbnailData: Data?) {
-        delegate.updateFromContact(with: photoData, and: thumbnailData)
+        delegate?.updateFromContact(with: photoData, and: thumbnailData)
     }
     
 }
@@ -141,7 +141,7 @@ private extension AvatarImageService {
             imagePicker.modalPresentationStyle = .fullScreen
         }
         
-        viewController.present(imagePicker, animated: true, completion: nil)
+        viewController?.present(imagePicker, animated: true, completion: nil)
     }
     
     func getLastImage(resizedTo targetSize: CGSize?) {
@@ -169,7 +169,7 @@ private extension AvatarImageService {
                 print("status=image-request-failed error=\(error)")
                 return
             }
-            self.delegate.updateImage(with: image)
+            self.delegate?.updateImage(with: image)
         }
     }
     

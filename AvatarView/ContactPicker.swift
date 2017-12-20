@@ -17,14 +17,14 @@ open class ContactPicker: NSObject {
     
     // MARK: - Internal properties
     
-    let viewController: UIViewController
+    weak var viewController: UIViewController?
     let delegate: ContactPickerDelegate
     let photoRequired: Bool
     
     
     // MARK: - Initializer
     
-    public init(viewController: UIViewController, delegate: ContactPickerDelegate, photoRequired: Bool = false) {
+    public init(viewController: UIViewController?, delegate: ContactPickerDelegate, photoRequired: Bool = false) {
         self.viewController = viewController
         self.delegate = delegate
         self.photoRequired = photoRequired
@@ -46,7 +46,7 @@ open class ContactPicker: NSObject {
             picker.popoverPresentationController?.sourceView = view.superview
             picker.popoverPresentationController?.sourceRect = view.frame
         }
-        viewController.present(picker, animated: true) { _ in
+        viewController?.present(picker, animated: true) { _ in
             completion?()
         }
     }
