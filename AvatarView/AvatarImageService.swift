@@ -7,6 +7,7 @@
 
 import UIKit
 import Contacts
+import Photos
 
 public protocol AvatarImageServiceDelegate: class {
     func updateImage(with image: UIImage?)
@@ -37,7 +38,7 @@ open class AvatarImageService: NSObject {
     
     // MARK: - Public functions
     
-    public func presentImageOptions(from sender: Any?, existingPhoto: Bool = false, namedPerson: NamePresentable? = nil, tintColor: UIColor? = nil, statusBarStyle: UIStatusBarStyle = .default) {
+    public func presentImageOptions(from sender: Any?, existingPhoto: Bool = false, namedPerson: NamePresentable? = nil, tintColor: UIColor? = nil, statusBarStyle: UIStatusBarStyle = .default, resizedTo targetSize: CGSize? = nil) {
         AvatarImageService.statusBarStyle = statusBarStyle
         let title: String
         if let namedPerson = namedPerson {
@@ -53,9 +54,9 @@ open class AvatarImageService: NSObject {
         if let tintColor = tintColor {
             actionSheet.view.tintColor = tintColor
         }
-//        actionSheet.addAction(UIAlertAction(title: NSLocalizedString("Use last photo", comment: "Action title to use most recent photo in library"), style: .default) { _ in
-//            // TODO: Grab last photo
-//        })
+        actionSheet.addAction(UIAlertAction(title: NSLocalizedString("Use last photo", comment: "Action title to use most recent photo in library"), style: .default) { _ in
+            self.getLastImage(resizedTo: targetSize)
+        })
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             actionSheet.addAction(UIAlertAction(title: NSLocalizedString("Take photo", comment: "Action title to take a new photo"), style: .default) { _ in
                 self.pickImage(fromLibrary: false)
@@ -141,6 +142,35 @@ private extension AvatarImageService {
         }
         
         viewController.present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func getLastImage(resizedTo targetSize: CGSize?) {
+        let manager = PHImageManager.default()
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.fetchLimit = 1
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+        let fetchResults = PHAsset.fetchAssets(with: .image, options: fetchOptions)
+        guard let asset = fetchResults.firstObject else { return }
+        let size: CGSize
+        if let targetSize = targetSize {
+            size = targetSize
+        } else {
+            size = CGSize(width: asset.pixelWidth, height: asset.pixelHeight)
+        }
+        manager.requestImage(for: asset, targetSize: size, contentMode: .aspectFit, options: nil) { image, info in
+            if let degraded = info?[PHImageResultIsDegradedKey] as? Bool, degraded {
+                print("status=degraded-image-returned")
+            }
+            if let cancelled = info?[PHImageCancelledKey] as? Bool, cancelled {
+                print("status=image-request-cancelled")
+                return
+            }
+            if let error = info?[PHImageErrorKey] as? Error {
+                print("status=image-request-failed error=\(error)")
+                return
+            }
+            self.delegate.updateImage(with: image)
+        }
     }
     
 }
