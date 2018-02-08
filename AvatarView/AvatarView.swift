@@ -155,11 +155,7 @@ import Kingfisher
         }
         
         if let initialsString = presenter.initialsString, !initialsString.characters.isEmpty {
-            if CharacterSet.letters.isSuperset(of: CharacterSet(charactersIn: initialsString)) {
-                initials = initialsString
-            } else {
-                initials = "#"
-            }
+            initials = initialsString
         } else {
             initials = nil
         }
