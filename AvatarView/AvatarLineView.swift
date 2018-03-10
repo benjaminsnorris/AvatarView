@@ -131,8 +131,10 @@ private extension AvatarLineView {
     }
     
     func updateAvatars() {
-        avatarViews.forEach { $0.removeFromSuperview() }
-        avatarViews.removeAll()
+        if !avatarViews.isEmpty {
+            avatarViews.forEach { $0.removeFromSuperview() }
+            avatarViews.removeAll()
+        }
         
         if avatars.isEmpty {
             addAvatar(for: nil)
