@@ -154,7 +154,7 @@ import Kingfisher
             return
         }
         
-        if let initialsString = presenter.initialsString, !initialsString.characters.isEmpty {
+        if let initialsString = presenter.initialsString, !initialsString.isEmpty {
             initials = initialsString
         } else {
             initials = nil

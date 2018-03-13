@@ -59,8 +59,8 @@ open class ContactPicker: NSObject {
 extension ContactPicker: CNContactPickerDelegate {
     
     public func contactPicker(_ picker: CNContactPickerViewController, didSelect contact: CNContact) {
-        var firstName = contact.givenName.characters.count > 0 ? contact.givenName : contact.familyName
-        if contact.middleName.characters.count > 0 {
+        var firstName = contact.givenName.count > 0 ? contact.givenName : contact.familyName
+        if contact.middleName.count > 0 {
             firstName += " \(contact.middleName)"
         }
         let lastName: String? = contact.familyName == firstName ? nil : contact.familyName

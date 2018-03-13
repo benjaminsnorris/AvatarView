@@ -33,7 +33,7 @@ public extension NamePresentable {
             let name = givenName ?? ""
             if name.isEmpty {
                 fullName = familyName ?? ""
-            } else if let familyName = familyName , familyName.characters.count > 0 {
+            } else if let familyName = familyName , familyName.count > 0 {
                 fullName = "\(name) \(familyName)"
             } else {
                 fullName = name
@@ -44,13 +44,13 @@ public extension NamePresentable {
     
     public var initials: String? {
         var initialsString = String()
-        if let givenName = givenName , givenName.characters.count > 0 {
-            initialsString += givenName.substring(to: givenName.characters.index(after: givenName.startIndex))
+        if let givenName = givenName , givenName.count > 0 {
+            initialsString += givenName.substring(to: givenName.index(after: givenName.startIndex))
         }
-        if let familyName = familyName , familyName.characters.count > 0 {
-            initialsString += familyName.substring(to: familyName.characters.index(after: familyName.startIndex))
+        if let familyName = familyName , familyName.count > 0 {
+            initialsString += familyName.substring(to: familyName.index(after: familyName.startIndex))
         }
-        if initialsString.characters.count == 0 {
+        if initialsString.count == 0 {
             return nil
         }
         return initialsString.uppercased()
@@ -69,14 +69,14 @@ public extension Collection where Self.Iterator.Element: NamePresentable {
     
     public func sortedByGivenName(ascending: Bool = true) -> [Self.Iterator.Element] {
         return self.sorted { first, second in
-            guard let firstName = first.givenName, !firstName.characters.isEmpty, let secondName = second.givenName, !secondName.characters.isEmpty else { return ascending }
+            guard let firstName = first.givenName, !firstName.isEmpty, let secondName = second.givenName, !secondName.isEmpty else { return ascending }
             return ascending ? firstName < secondName : firstName > secondName
         }
     }
     
     public func sortedByFamilyName(ascending: Bool = true) -> [Self.Iterator.Element] {
         return self.sorted { first, second in
-            guard let firstName = first.familyName, !firstName.characters.isEmpty, let secondName = second.familyName, !secondName.characters.isEmpty else { return ascending }
+            guard let firstName = first.familyName, !firstName.isEmpty, let secondName = second.familyName, !secondName.isEmpty else { return ascending }
             return ascending ? firstName < secondName : firstName > secondName
         }
     }
