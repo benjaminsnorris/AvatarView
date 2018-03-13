@@ -203,10 +203,10 @@ private extension AvatarView {
         
         initialsLabel.centerYAnchor.constraint(equalTo: backgroundView.centerYAnchor).isActive = true
         initialsLeadingConstraint = initialsLabel.leadingAnchor.constraint(equalTo: backgroundView.leadingAnchor, constant: innerMargin)
-        initialsLeadingConstraint.priority = 999
+        initialsLeadingConstraint.priority = UILayoutPriority(rawValue: 999)
         initialsLeadingConstraint.isActive = true
         initialsTrailingConstraint = backgroundView.trailingAnchor.constraint(equalTo: initialsLabel.trailingAnchor, constant: innerMargin)
-        initialsTrailingConstraint.priority = 999
+        initialsTrailingConstraint.priority = UILayoutPriority(rawValue: 999)
         initialsTrailingConstraint.isActive = true
         
         // Add image as an overlay to hide initials once it's been added
@@ -248,7 +248,7 @@ private extension AvatarView {
         if let fontName = fontName, let font = UIFont(name: fontName, size: fontSize) {
             customFont = font
         } else {
-            customFont = UIFont.systemFont(ofSize: fontSize, weight: UIFontWeightLight)
+            customFont = UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight.light)
         }
         initialsLabel.text = initials?.trimmingCharacters(in: CharacterSet.whitespaces)
         initialsLabel.font = customFont

@@ -45,10 +45,10 @@ public extension NamePresentable {
     public var initials: String? {
         var initialsString = String()
         if let givenName = givenName , givenName.count > 0 {
-            initialsString += givenName.substring(to: givenName.index(after: givenName.startIndex))
+            initialsString += String(givenName[..<givenName.index(after: givenName.startIndex)])
         }
         if let familyName = familyName , familyName.count > 0 {
-            initialsString += familyName.substring(to: familyName.index(after: familyName.startIndex))
+            initialsString += String(familyName[..<familyName.index(after: familyName.startIndex)])
         }
         if initialsString.count == 0 {
             return nil

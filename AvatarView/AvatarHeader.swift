@@ -183,7 +183,7 @@ private extension AvatarHeader {
         if let fontName = fontName, let font = UIFont(name: fontName, size: fontSize) {
             customFont = font
         } else {
-            customFont = UIFont.systemFont(ofSize: fontSize, weight: UIFontWeightLight)
+            customFont = UIFont.systemFont(ofSize: fontSize, weight: UIFont.Weight.light)
         }
         name.font = customFont
     }

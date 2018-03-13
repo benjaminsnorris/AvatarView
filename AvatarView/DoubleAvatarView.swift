@@ -197,7 +197,7 @@ private extension DoubleAvatarView {
         addConstraint(primaryAvatarView.heightAnchor.constraint(equalTo: primaryAvatarView.widthAnchor))
         let primaryWidthConstraint = primaryAvatarView.widthAnchor.constraint(equalToConstant: primaryAvatarWidth(fromSuperFrame: frame))
         primaryWidthConstraint.isActive = true
-        primaryWidthConstraint.priority = 999
+        primaryWidthConstraint.priority = UILayoutPriority(rawValue: 999)
         
         addConstraint(secondaryAvatarView.heightAnchor.constraint(equalTo: secondaryAvatarView.widthAnchor))
         secondaryHeightConstraint = secondaryAvatarView.heightAnchor.constraint(equalTo: primaryAvatarView.heightAnchor, multiplier: secondarySizePercentage)
@@ -205,7 +205,7 @@ private extension DoubleAvatarView {
         
         // Primary <-> superview
         let primaryTopConstraint = topAnchor.constraint(equalTo: primaryAvatarView.topAnchor)
-        primaryTopConstraint.priority = 999
+        primaryTopConstraint.priority = UILayoutPriority(rawValue: 999)
         primaryTopConstraint.isActive = true
         primaryLeadingConstraint = leadingAnchor.constraint(equalTo: primaryAvatarView.leadingAnchor)
         primaryTrailingConstraint = trailingAnchor.constraint(equalTo: primaryAvatarView.trailingAnchor)
@@ -217,9 +217,9 @@ private extension DoubleAvatarView {
         secondaryLeadingConstraint = leadingAnchor.constraint(equalTo: secondaryAvatarView.leadingAnchor)
         secondaryTrailingConstraint = trailingAnchor.constraint(equalTo: secondaryAvatarView.trailingAnchor)
         secondaryInnerLeadingConstraint = secondaryAvatarView.leadingAnchor.constraint(equalTo: primaryAvatarView.trailingAnchor)
-        secondaryInnerLeadingConstraint.priority = 999
+        secondaryInnerLeadingConstraint.priority = UILayoutPriority(rawValue: 999)
         secondaryInnerTrailingConstraint = secondaryAvatarView.trailingAnchor.constraint(equalTo: primaryAvatarView.leadingAnchor)
-        secondaryInnerTrailingConstraint.priority = 999
+        secondaryInnerTrailingConstraint.priority = UILayoutPriority(rawValue: 999)
     }
     
     func updateAllConstraints() {

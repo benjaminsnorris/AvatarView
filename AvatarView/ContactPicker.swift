@@ -46,7 +46,7 @@ open class ContactPicker: NSObject {
             picker.popoverPresentationController?.sourceView = view.superview
             picker.popoverPresentationController?.sourceRect = view.frame
         }
-        viewController?.present(picker, animated: true) { _ in
+        viewController?.present(picker, animated: true) {
             completion?()
         }
     }
