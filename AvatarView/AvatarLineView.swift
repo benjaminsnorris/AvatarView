@@ -190,6 +190,7 @@ private extension AvatarLineView {
     func updateColors() {
         avatarViews.forEach { avatarView in
             avatarView.borderColor = avatarBorderColor
+            avatarView.innerColor = innerColor
             avatarView.textColor = textColor
             avatarView.spacingColor = spacingColor
         }
