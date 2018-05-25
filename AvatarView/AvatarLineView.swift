@@ -106,6 +106,13 @@ import UIKit
 extension AvatarLineView {
     
     open func update(with avatars: [AvatarPresentable]) {
+        if self.avatars.count == avatars.count {
+            let combined = zip(self.avatars, avatars)
+            let identical = combined.reduce(true) { result, pair in result && pair.0.isIdentical(to: pair.1) }
+            if identical {
+                return
+            }
+        }
         self.avatars = avatars
         updateAvatars()
     }

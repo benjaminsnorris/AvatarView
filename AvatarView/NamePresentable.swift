@@ -14,6 +14,16 @@ public protocol AvatarPresentable {
     var imageURL: URL? { get }
 }
 
+extension AvatarPresentable {
+    
+    func isIdentical(to other: AvatarPresentable) -> Bool {
+        return initialsString == other.initialsString
+            && image == other.image
+            && imageURL == other.imageURL
+    }
+    
+}
+
 
 public protocol NamePresentable {
     var givenName: String? { get }
