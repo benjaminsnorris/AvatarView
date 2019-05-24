@@ -14,23 +14,11 @@
 		7096370D1D00A939006884B8 /* NamePresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7096370C1D00A939006884B8 /* NamePresentable.swift */; };
 		70B7E0F01D8AD1800010220B /* AvatarHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70B7E0EF1D8AD1800010220B /* AvatarHeader.swift */; };
 		70F4CDE71CFFA22200A6F8BF /* AvatarView.h in Headers */ = {isa = PBXBuildFile; fileRef = 70F4CDE61CFFA22200A6F8BF /* AvatarView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		70F4CDEE1CFFA22200A6F8BF /* AvatarView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70F4CDE31CFFA22200A6F8BF /* AvatarView.framework */; };
-		70F4CDF31CFFA22200A6F8BF /* AvatarViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F4CDF21CFFA22200A6F8BF /* AvatarViewTests.swift */; };
 		70F4CDFE1CFFA27400A6F8BF /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70F4CDFD1CFFA27400A6F8BF /* AvatarView.swift */; };
 		A15D5DAF1EE0B04200C8F309 /* DoubleAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15D5DAE1EE0B04200C8F309 /* DoubleAvatarView.swift */; };
 		E7955E541F0D8E6C00B8E7ED /* AvatarView.h in Headers */ = {isa = PBXBuildFile; fileRef = 70F4CDE61CFFA22200A6F8BF /* AvatarView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E7955E561F0D8EB500B8E7ED /* NamePresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7096370C1D00A939006884B8 /* NamePresentable.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		70F4CDEF1CFFA22200A6F8BF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 70F4CDDA1CFFA22200A6F8BF /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 70F4CDE21CFFA22200A6F8BF;
-			remoteInfo = AvatarView;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		361DC1A21F34AC680075A51A /* AvatarLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarLineView.swift; sourceTree = "<group>"; };
@@ -42,9 +30,6 @@
 		70F4CDE31CFFA22200A6F8BF /* AvatarView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AvatarView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		70F4CDE61CFFA22200A6F8BF /* AvatarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AvatarView.h; sourceTree = "<group>"; };
 		70F4CDE81CFFA22200A6F8BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		70F4CDED1CFFA22200A6F8BF /* AvatarViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AvatarViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		70F4CDF21CFFA22200A6F8BF /* AvatarViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarViewTests.swift; sourceTree = "<group>"; };
-		70F4CDF41CFFA22200A6F8BF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		70F4CDFD1CFFA27400A6F8BF /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		A15D5DAE1EE0B04200C8F309 /* DoubleAvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleAvatarView.swift; sourceTree = "<group>"; };
 		E7955E481F0D8CF600B8E7ED /* AvatarView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AvatarView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,14 +41,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				705E7D2D1DE4A1C1002AB0FF /* Kingfisher.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		70F4CDEA1CFFA22200A6F8BF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				70F4CDEE1CFFA22200A6F8BF /* AvatarView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,7 +66,6 @@
 			isa = PBXGroup;
 			children = (
 				70F4CDE51CFFA22200A6F8BF /* AvatarView */,
-				70F4CDF11CFFA22200A6F8BF /* AvatarViewTests */,
 				70F4CDE41CFFA22200A6F8BF /* Products */,
 				705E7D2B1DE4A1C1002AB0FF /* Frameworks */,
 			);
@@ -99,7 +75,6 @@
 			isa = PBXGroup;
 			children = (
 				70F4CDE31CFFA22200A6F8BF /* AvatarView.framework */,
-				70F4CDED1CFFA22200A6F8BF /* AvatarViewTests.xctest */,
 				E7955E481F0D8CF600B8E7ED /* AvatarView.framework */,
 			);
 			name = Products;
@@ -119,15 +94,6 @@
 				7096370C1D00A939006884B8 /* NamePresentable.swift */,
 			);
 			path = AvatarView;
-			sourceTree = "<group>";
-		};
-		70F4CDF11CFFA22200A6F8BF /* AvatarViewTests */ = {
-			isa = PBXGroup;
-			children = (
-				70F4CDF21CFFA22200A6F8BF /* AvatarViewTests.swift */,
-				70F4CDF41CFFA22200A6F8BF /* Info.plist */,
-			);
-			path = AvatarViewTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,24 +136,6 @@
 			productReference = 70F4CDE31CFFA22200A6F8BF /* AvatarView.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		70F4CDEC1CFFA22200A6F8BF /* AvatarViewTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 70F4CDFA1CFFA22200A6F8BF /* Build configuration list for PBXNativeTarget "AvatarViewTests" */;
-			buildPhases = (
-				70F4CDE91CFFA22200A6F8BF /* Sources */,
-				70F4CDEA1CFFA22200A6F8BF /* Frameworks */,
-				70F4CDEB1CFFA22200A6F8BF /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				70F4CDF01CFFA22200A6F8BF /* PBXTargetDependency */,
-			);
-			name = AvatarViewTests;
-			productName = AvatarViewTests;
-			productReference = 70F4CDED1CFFA22200A6F8BF /* AvatarViewTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		E7955E471F0D8CF600B8E7ED /* AvatarView-watchOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E7955E4F1F0D8CF700B8E7ED /* Build configuration list for PBXNativeTarget "AvatarView-watchOS" */;
@@ -220,10 +168,6 @@
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 0920;
 					};
-					70F4CDEC1CFFA22200A6F8BF = {
-						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0920;
-					};
 					E7955E471F0D8CF600B8E7ED = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = M9Y5WF87VL;
@@ -245,7 +189,6 @@
 			projectRoot = "";
 			targets = (
 				70F4CDE21CFFA22200A6F8BF /* AvatarView */,
-				70F4CDEC1CFFA22200A6F8BF /* AvatarViewTests */,
 				E7955E471F0D8CF600B8E7ED /* AvatarView-watchOS */,
 			);
 		};
@@ -253,13 +196,6 @@
 
 /* Begin PBXResourcesBuildPhase section */
 		70F4CDE11CFFA22200A6F8BF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		70F4CDEB1CFFA22200A6F8BF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -290,14 +226,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		70F4CDE91CFFA22200A6F8BF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				70F4CDF31CFFA22200A6F8BF /* AvatarViewTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		E7955E431F0D8CF600B8E7ED /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -307,14 +235,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		70F4CDF01CFFA22200A6F8BF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 70F4CDE21CFFA22200A6F8BF /* AvatarView */;
-			targetProxy = 70F4CDEF1CFFA22200A6F8BF /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		70F4CDF51CFFA22200A6F8BF /* Debug */ = {
@@ -474,30 +394,6 @@
 			};
 			name = Release;
 		};
-		70F4CDFB1CFFA22200A6F8BF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = AvatarViewTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = design.bsn.AvatarViewTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
-			};
-			name = Debug;
-		};
-		70F4CDFC1CFFA22200A6F8BF /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				INFOPLIST_FILE = AvatarViewTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = design.bsn.AvatarViewTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
-			};
-			name = Release;
-		};
 		E7955E4D1F0D8CF700B8E7ED /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -566,15 +462,6 @@
 			buildConfigurations = (
 				70F4CDF81CFFA22200A6F8BF /* Debug */,
 				70F4CDF91CFFA22200A6F8BF /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		70F4CDFA1CFFA22200A6F8BF /* Build configuration list for PBXNativeTarget "AvatarViewTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				70F4CDFB1CFFA22200A6F8BF /* Debug */,
-				70F4CDFC1CFFA22200A6F8BF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
