@@ -20,14 +20,14 @@ open class AvatarImageService: NSObject {
     
     weak var viewController: UIViewController?
     weak var delegate: AvatarImageServiceDelegate?
-    let cameraDevice: UIImagePickerControllerCameraDevice
+    let cameraDevice: UIImagePickerController.CameraDevice
     static var statusBarStyle = UIStatusBarStyle.default
     var contactPicker: ContactPicker!
     
     
     // MARK: - Initializers
     
-    required public init(viewController: UIViewController, delegate: AvatarImageServiceDelegate, cameraDevice: UIImagePickerControllerCameraDevice = .front) {
+    required public init(viewController: UIViewController, delegate: AvatarImageServiceDelegate, cameraDevice: UIImagePickerController.CameraDevice = .front) {
         self.viewController = viewController
         self.delegate = delegate
         self.cameraDevice = cameraDevice
@@ -90,12 +90,15 @@ open class AvatarImageService: NSObject {
 
 extension AvatarImageService: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+// Local variable inserted by Swift 4.2 migrator.
+let info = convertFromUIImagePickerControllerInfoKeyDictionary(info)
+
         defer { picker.dismiss(animated: true, completion: nil) }
-        if picker.sourceType == .camera, let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        if picker.sourceType == .camera, let originalImage = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage {
             UIImageWriteToSavedPhotosAlbum(originalImage, nil, nil, nil)
         }
-        guard let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage else { return }
+        guard let editedImage = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.editedImage)] as? UIImage else { return }
         delegate?.updateImage(with: editedImage)
     }
     
@@ -184,4 +187,14 @@ private final class CustomStatusBarImagePickerController: UIImagePickerControlle
         return AvatarImageService.statusBarStyle
     }
     
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+	return input.rawValue
 }

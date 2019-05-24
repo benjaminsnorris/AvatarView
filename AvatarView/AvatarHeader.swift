@@ -88,7 +88,7 @@ public typealias AvatarHeaderPresentable = NamePresentable & AvatarPresentable
             }
         }
     }
-    open let avatar = AvatarView(frame: .zero)
+    public let avatar = AvatarView(frame: .zero)
     
     
     // MARK: - Private properties
