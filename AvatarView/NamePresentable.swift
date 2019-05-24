@@ -32,7 +32,7 @@ public protocol NamePresentable {
 
 public extension NamePresentable {
     
-    public var name: String {
+    var name: String {
         let contact = CNMutableContact()
         contact.givenName = givenName ?? ""
         contact.familyName = familyName ?? ""
@@ -52,7 +52,7 @@ public extension NamePresentable {
         return fullName
     }
     
-    public var initials: String? {
+    var initials: String? {
         var initialsString = String()
         if let givenName = givenName , givenName.count > 0 {
             initialsString += String(givenName[..<givenName.index(after: givenName.startIndex)])
@@ -73,18 +73,18 @@ public extension NamePresentable {
 
 public extension Collection where Self.Iterator.Element: NamePresentable {
     
-    public func sortedByName(ascending: Bool = true) -> [Self.Iterator.Element] {
+    func sortedByName(ascending: Bool = true) -> [Self.Iterator.Element] {
         return self.sorted { ascending ? $0.name < $1.name : $0.name > $1.name }
     }
     
-    public func sortedByGivenName(ascending: Bool = true) -> [Self.Iterator.Element] {
+    func sortedByGivenName(ascending: Bool = true) -> [Self.Iterator.Element] {
         return self.sorted { first, second in
             guard let firstName = first.givenName, !firstName.isEmpty, let secondName = second.givenName, !secondName.isEmpty else { return ascending }
             return ascending ? firstName < secondName : firstName > secondName
         }
     }
     
-    public func sortedByFamilyName(ascending: Bool = true) -> [Self.Iterator.Element] {
+    func sortedByFamilyName(ascending: Bool = true) -> [Self.Iterator.Element] {
         return self.sorted { first, second in
             guard let firstName = first.familyName, !firstName.isEmpty, let secondName = second.familyName, !secondName.isEmpty else { return ascending }
             return ascending ? firstName < secondName : firstName > secondName
