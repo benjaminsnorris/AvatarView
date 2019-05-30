@@ -10,7 +10,7 @@ import Contacts
 import Photos
 
 public protocol AvatarImageServiceDelegate: class {
-    func updateImage(with image: UIImage?)
+    func updateImage(with image: UIImage?, imageURL: URL?)
     func updateFromContact(with photoData: Data?, and thumbnailData: Data?)
 }
 
@@ -70,7 +70,7 @@ open class AvatarImageService: NSObject {
         }))
         if existingPhoto {
             actionSheet.addAction(UIAlertAction(title: NSLocalizedString("Remove photo", comment: "Action title to remove photo"), style: .destructive) { _ in
-                self.delegate?.updateImage(with: nil)
+                self.delegate?.updateImage(with: nil, imageURL: nil)
             })
         }
         actionSheet.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel button title"), style: .cancel, handler: nil))
@@ -91,13 +91,19 @@ open class AvatarImageService: NSObject {
 extension AvatarImageService: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-
+        
         defer { picker.dismiss(animated: true, completion: nil) }
         if picker.sourceType == .camera, let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             UIImageWriteToSavedPhotosAlbum(originalImage, nil, nil, nil)
         }
         guard let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else { return }
-        delegate?.updateImage(with: editedImage)
+        var imageURL: URL?
+        if #available(iOSApplicationExtension 11.0, *) {
+            imageURL = info[UIImagePickerController.InfoKey.imageURL] as? URL
+        } else {
+            imageURL = info[UIImagePickerController.InfoKey.referenceURL] as? URL
+        }
+        delegate?.updateImage(with: editedImage, imageURL: imageURL)
     }
     
 }
@@ -106,7 +112,7 @@ extension AvatarImageService: UIImagePickerControllerDelegate, UINavigationContr
 // MARK: - Contact picker delegate
 
 extension AvatarImageService: ContactPickerDelegate {
-
+    
     public func contactPickerCanceled() {
         // Do nothing
     }
@@ -170,7 +176,7 @@ private extension AvatarImageService {
                 print("status=image-request-failed error=\(error)")
                 return
             }
-            self.delegate?.updateImage(with: image)
+            self.delegate?.updateImage(with: image, imageURL: nil)
         }
     }
     
