@@ -151,6 +151,7 @@ extension DoubleAvatarView {
             primaryTrailingConstraint.isActive = true
             secondaryHeightConstraint?.isActive = false
         } else {
+            secondaryAvatarView.isHidden = false
             primaryCenteredConstraint.isActive = false
             primaryLeadingConstraint.isActive = isOnRight
             primaryTrailingConstraint.isActive = !isOnRight
