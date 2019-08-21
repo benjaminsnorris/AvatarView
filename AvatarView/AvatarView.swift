@@ -162,7 +162,7 @@ import Kingfisher
         if let image = presenter.image {
             self.image = image
         } else if let imageURL = presenter.imageURL {
-            imageView.kf.setImage(with: imageURL)
+            imageView.kf.setImage(with: imageURL, options: [.keepCurrentImageWhileLoading])
         } else {
             image = nil
         }
