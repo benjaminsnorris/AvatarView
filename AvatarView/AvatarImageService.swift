@@ -9,7 +9,7 @@ import UIKit
 import Contacts
 import Photos
 
-public protocol AvatarImageServiceDelegate: class {
+public protocol AvatarImageServiceDelegate: AnyObject {
     func updateImage(with image: UIImage?, imageURL: URL?)
     func updateFromContact(with photoData: Data?, and thumbnailData: Data?)
 }
